@@ -2,10 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fonts */
+@font-face {
+	font-family: 'Poppins';
+	src: local('Poppins'),
+		url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+}
+@font-face {
+	font-family: 'Outfit';
+	src: local('Outfit'), url('../public/font/Outfit.ttf');
+}
+
+@font-face {
+	font-family: 'Outfit';
+	src: local('Poppins'), url('../public/font/Poppins-Bold.ttf');
+	unicode-range: U+22, U+27, U+2c, U+3b;
+}
+
 @layer base {
 	/* Containers */
 	section {
-		@apply pt-26 h-screen;
+		@apply pt-26 h-screen 
+		/* border border-black; */;
 	}
 
 	html {
@@ -21,17 +39,34 @@
 	h6 {
 		@apply font-heading;
 	}
-	/* 	
+
 	h1 {
+		@apply font-extrabold leading-[64px] text-[64px];
 	}
+
+	h3 {
+		@apply font-bold text-5xl;
+	}
+
+	/* 	
 	h2 {
 	}
-	h3 {
-	}
+	
 	h4 {
 	}
 	h5 {
 	}
 	h6 {
 	} */
+}
+
+@layer components {
+	/* For components e.g. btn-blue for buttons */
+	.slide {
+		@apply w-full h-full bg-cover bg-no-repeat;
+	}
+
+	.slide-text {
+		@apply absolute bottom-16 right-0 py-5 px-4 bg-dark-100 rounded-l-sm text-right text-light uppercase;
+	}
 }

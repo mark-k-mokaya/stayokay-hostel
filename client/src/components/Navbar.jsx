@@ -35,7 +35,7 @@ const scrollTo = (id) => () => {
 
 export const Navbar = () => {
 	return (
-		<nav className="flex fixed justify-between w-full h-26 px-0 bg-light shadow-md sm:px-8 lg:px-15 z-40">
+		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
 			{/* Logo */}
 			<Link to="/" onClick={scrollTo()}>
 				<StayOkayLogo className="" />
@@ -45,7 +45,7 @@ export const Navbar = () => {
 			<div
 				id="navlinks"
 				className="
-			hidden items-center justify-evenly space-x-6 leading-4 font-semibold text-maroonSecondary xl:flex">
+			hidden items-center justify-evenly space-x-6 leading-6 font-semibold text-maroonSecondary xl:flex">
 				{links.map((link) => (
 					<Link
 						key={link.id}
