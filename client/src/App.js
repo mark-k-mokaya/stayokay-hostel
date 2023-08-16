@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom';
-import {Navbar} from './components/Navbar';
+import {Navbar} from './components';
 import Home from './views/Home';
 
 function App() {
@@ -20,7 +20,11 @@ function App() {
 			<Navbar />
 			<Routes>
 				{links.map((link, id) => (
-					<Route key={id} path={link.path} element={<Home scrollTo={link.id} />} />
+					<Route
+						key={id}
+						path={link.path}
+						element={<Home scrollTo={link.id} />}
+					/>
 				))}
 
 				{/* Routes to terms and conditions and admin screen to check reviews.*/}

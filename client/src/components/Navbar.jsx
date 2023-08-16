@@ -45,7 +45,7 @@ export const Navbar = () => {
 			<div
 				id="navlinks"
 				className="
-			hidden items-center justify-evenly space-x-6 leading-6 font-semibold text-maroonSecondary xl:flex">
+			hidden items-center justify-evenly space-x-6 leading-6 font-semibold text-base text-maroonSecondary xl:flex">
 				{links.map((link) => (
 					<Link
 						key={link.id}

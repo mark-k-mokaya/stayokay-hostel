@@ -22,12 +22,12 @@
 @layer base {
 	/* Containers */
 	section {
-		@apply pt-26 h-screen 
-		/* border border-black; */;
+		@apply py-32 px-12 xl:py-40 xl:px-44
+		/* border border-black */;
 	}
 
 	html {
-		@apply scroll-smooth font-body leading-6;
+		@apply scroll-smooth font-body text-dark-75 leading-6;
 	}
 
 	/* Typography */
@@ -40,12 +40,29 @@
 		@apply font-heading;
 	}
 
-	h1 {
-		@apply font-extrabold leading-[64px] text-[64px];
+	h1,
+	h2 {
+		@apply font-extrabold text-5xl md:leading-[64px] md:text-[64px];
 	}
 
 	h3 {
-		@apply font-bold text-5xl;
+		@apply font-bold text-4xl
+		md:text-5xl;
+	}
+
+	h4 {
+		@apply font-bold text-[2.5rem] leading-10
+		md:text-4xl;
+	}
+
+	h5 {
+		@apply font-bold text-3xl
+		md:text-4xl;
+	}
+
+	h6 {
+		@apply font-bold text-[2.5rem] leading-10
+		md:text-4xl;
 	}
 
 	/* 	
@@ -63,10 +80,16 @@
 @layer components {
 	/* For components e.g. btn-blue for buttons */
 	.slide {
-		@apply w-full h-full bg-cover bg-no-repeat;
+		@apply absolute w-full h-full bg-cover bg-no-repeat overflow-hidden transition duration-1000;
 	}
 
 	.slide-text {
-		@apply absolute bottom-16 right-0 py-5 px-4 bg-dark-100 rounded-l-sm text-right text-light uppercase;
+		@apply absolute bottom-[15%] right-0 py-5 px-4 rounded-l-sm
+		bg-dark-100  text-right text-light uppercase;
+	}
+
+	.pattern-divider{
+		@apply bg-pattern bg-maroonSecondary h-[120px] bg-[length:120px_120px];
+		
 	}
 }

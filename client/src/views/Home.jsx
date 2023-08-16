@@ -9,6 +9,7 @@ import {
 	Book,
 	Contact,
 } from '../views';
+import {Divider} from '../components';
 
 const Home = (props) => {
 	useEffect(() => {
@@ -25,12 +26,19 @@ const Home = (props) => {
 		<main className='overflow-x-hidden'>
 			<Hero />
 			<About />
+			<Divider />
 			<Features />
+			<Divider />
 			<Rooms />
+			<Divider />
 			<Gallery />
+			<Divider />
 			<Reviews />
+			<Divider />
 			<Book />
+			<Divider />
 			<Contact />
+			<Divider />
 		</main>
 	);
 };
