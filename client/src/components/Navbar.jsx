@@ -1,3 +1,5 @@
+import {useState} from 'react';
+import MobileMenu from './MobileMenu';
 import {Link} from 'react-router-dom';
 import {ReactComponent as StayOkayLogo} from '../assets/Logo.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -10,6 +12,7 @@ const links = [
 	{name: 'Gallery', path: '/gallery', id: '#gallery'},
 	{name: 'Reviews', path: '/reviews', id: '#reviews'},
 	{name: 'Contact Us', path: '/contact', id: '#contact'},
+	{name: 'Book Now', path: '/book', id: '#book'},
 	// {name: 'Terms', path: '/terms-and-conditions'},
 ];
 
@@ -33,6 +36,8 @@ const scrollTo = (id) => () => {
 // });
 
 export const Navbar = () => {
+	const [showMenu, setShowMenu] = useState(false);
+
 	return (
 		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
 			{/* Logo */}
@@ -45,30 +50,34 @@ export const Navbar = () => {
 				id="navlinks"
 				className="
 			hidden items-center justify-evenly space-x-6 leading-6 font-semibold text-base text-maroonSecondary xl:flex">
-				{links.map((link) => (
-					<Link
-						key={link.id}
-						to="/"
-						onClick={scrollTo(link.id)}
-						className="hover:text-maroonPrimary">
-						{link.name}
-					</Link>
-				))}
-
-				<button
-					as={Link}
-					to="/"
-					onClick={scrollTo('#book')}
-					className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">
-					BOOK NOW
-				</button>
+				{links.map((link) =>
+					link.id != '#book' ? (
+						<Link
+							key={link.id}
+							to="/"
+							onClick={scrollTo(link.id)}
+							className="hover:text-maroonPrimary">
+							{link.name}
+						</Link>
+					) : (
+						<button
+							as={Link}
+							to="/"
+							onClick={scrollTo(link.id)}
+							className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">
+							BOOK NOW
+						</button>
+					)
+				)}
 			</div>
 
 			{/* Menu Button */}
 			<div id="menu-btn" className="block xl:hidden my-auto">
 				<button
 					className="flex items-center justify-center p-5 space-x-3 group"
-					onClick={toggleMenu}>
+					onClick={() => {
+						setShowMenu(true);
+					}}>
 					<FontAwesomeIcon
 						icon={faBars}
 						className="h-7 w-7 text-maroonPrimary group-hover:text-maroonPrimary"
@@ -77,56 +86,13 @@ export const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			<div
-				id="menu"
-				className="hidden absolute left-0 top-0 h-screen w-screen z-50">
-				{/* Background */}
-				<div id="menu-bg" className="w-full h-full  bg-dark-75"></div>
-
-				{/* Menu */}
-				<div className="absolute right-0 top-0 z-60 h-full w-8/12 md:w-5/12 bg-white">
-					<div
-						id="navlinks"
-						className="flex flex-col items-center mt-12 md:mt-24 text-xl space-y-8 leading-4">
-						{links.map((link) => (
-							<Link
-								key={link.path}
-								to="/"
-								onClick={() => {
-									toggleMenu();
-								}}>
-								{link.name}
-							</Link>
-						))}
-						<Link
-							key={'#book'}
-							to="/"
-							onClick={() => {
-								toggleMenu();
-							}}>
-							<button>BOOK NOW</button>
-						</Link>
-					</div>
-				</div>
-			</div>
+			{showMenu && (
+				<MobileMenu
+					links={links}
+					setShowMenu={setShowMenu}
+					scrollTo={scrollTo}
+				/>
+			)}
 		</nav>
 	);
-};
-
-const toggleMenu = () => {
-	const menu = document.querySelector('#menu');
-	const menuBtn = document.querySelector('#menu-btn');
-	const menuBg = document.querySelector('#menu-bg');
-	const links = document.getElementsByTagName('a');
-	console.log(links);
-
-	menuBtn.addEventListener('click', () => {
-		menu.classList.contains('hidden')
-			? menu.classList.toggle('hidden')
-			: menu.classList.add('hidden');
-	});
-
-	menuBg.addEventListener('click', () => {
-		menu.classList.add('hidden');
-	});
 };
