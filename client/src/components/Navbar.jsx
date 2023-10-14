@@ -38,6 +38,10 @@ const scrollTo = (id) => () => {
 export const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 
+	const hideMenu = () => {
+		setShowMenu(false);
+	};
+
 	return (
 		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
 			{/* Logo */}
@@ -61,6 +65,7 @@ export const Navbar = () => {
 						</Link>
 					) : (
 						<button
+							key={link.id}
 							as={Link}
 							to="/"
 							onClick={scrollTo(link.id)}
@@ -86,13 +91,7 @@ export const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			{showMenu && (
-				<MobileMenu
-					links={links}
-					setShowMenu={setShowMenu}
-					scrollTo={scrollTo}
-				/>
-			)}
+			{showMenu && <MobileMenu links={links} hideMenu={hideMenu} />}
 		</nav>
 	);
 };
