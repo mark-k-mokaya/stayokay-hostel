@@ -14,6 +14,7 @@ module.exports = {
 				error: '#CE4E4E',
 				light: '#FFFDFD',
 				'dark-100': 'rgba(28, 29, 33, 1)',
+				'dark-90': 'rgba(28, 29, 33, .9)',
 				'dark-75': 'rgba(28, 29, 33, .75)',
 				'dark-50': 'rgba(28, 29, 33, .5)',
 				'dark-25': 'rgba(28, 29, 33, .25)',

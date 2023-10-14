@@ -9,21 +9,21 @@ import {
 	Book,
 	Contact,
 } from '../views';
-import {Divider} from '../components';
+import {Divider, Footer} from '../components';
 
 const Home = (props) => {
-	useEffect(() => {
-		if (props.scrollTo) {
-			console.log(props.scrollTo);
-			const section = document.querySelector(props.scrollTo);
-			section && section.scrollIntoView();
-		} else {
-			window.scrollTo({top: 0, left: 0});
-		}
-	});
+	// useEffect(() => {
+	// 	if (props.scrollTo) {
+	// 		console.log(props.scrollTo);
+	// 		const section = document.querySelector(props.scrollTo);
+	// 		section && section.scrollIntoView();
+	// 	} else {
+	// 		window.scrollTo({top: 0, left: 0});
+	// 	}
+	// });
 
 	return (
-		<main className='overflow-x-hidden'>
+		<main className="overflow-x-hidden">
 			<Hero />
 			<About />
 			<Divider />
@@ -38,7 +38,7 @@ const Home = (props) => {
 			<Book />
 			<Divider />
 			<Contact />
-			<Divider />
+			<Footer/>
 		</main>
 	);
 };

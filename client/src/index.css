@@ -5,29 +5,55 @@
 /* Fonts */
 @font-face {
 	font-family: 'Poppins';
-	src: local('Poppins'),
-		url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+	src: local('Poppins Regular'),
+		url('./assets/fonts/Poppins-Regular.woff') format('woff');
+	font-weight: 400;
 }
 @font-face {
-	font-family: 'Outfit';
-	src: local('Outfit'), url('../public/font/Outfit.ttf');
+	font-family: 'Poppins';
+	src: local('Poppins Medium'),
+		url('./assets/fonts/Poppins-Medium.woff') format('woff');
+	font-weight: 500;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: local('Poppins SemiBold'),
+		url('./assets/fonts/Poppins-SemiBold.woff') format('woff');
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: local('Poppins Bold'),
+		url('./assets/fonts/Poppins-Bold.woff') format('woff');
+	font-weight: 700;
 }
 
 @font-face {
 	font-family: 'Outfit';
-	src: local('Poppins'), url('../public/font/Poppins-Bold.ttf');
-	unicode-range: U+22, U+27, U+2c, U+3b;
+	src: local('Outfit'), url('./assets/fonts/OutfitBold.woff') format('woff'),
+		url('./assets/fonts/OutfitExtraBold.woff') format('woff'),
+		url('./assets/fonts/OutfitBlack.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Outfit';
+	src: local('Poppins SemiBold'),
+		url('./assets/fonts/Poppins-SemiBold.woff') format('woff'),
+		local('Poppins Bold');
+	unicode-range: U+2c, U+3b;
 }
 
 @layer base {
+	html {
+		@apply scroll-smooth font-body text-dark-75 leading-6;
+	}
+
 	/* Containers */
 	section {
 		@apply py-32 px-12 xl:py-40 xl:px-44
 		/* border border-black */;
-	}
-
-	html {
-		@apply scroll-smooth font-body text-dark-75 leading-6;
 	}
 
 	/* Typography */
@@ -56,25 +82,17 @@
 	}
 
 	h5 {
-		@apply font-bold text-3xl
-		md:text-4xl;
+		@apply font-black text-3xl leading-8
+		md:text-4xl md:leading-9;
 	}
 
 	h6 {
-		@apply font-bold text-[2.5rem] leading-10
-		md:text-4xl;
+		@apply font-black text-2xl leading-10;
 	}
 
-	/* 	
-	h2 {
+	button {
+		@apply font-body rounded-[3px] uppercase;
 	}
-	
-	h4 {
-	}
-	h5 {
-	}
-	h6 {
-	} */
 }
 
 @layer components {
@@ -88,8 +106,39 @@
 		bg-dark-100  text-right text-light uppercase;
 	}
 
-	.pattern-divider{
+	.pattern-divider {
 		@apply bg-pattern bg-maroonSecondary h-[120px] bg-[length:120px_120px];
-		
+	}
+
+	.section-container {
+		@apply h-full flex flex-col items-center justify-center;
+	}
+
+	.section-content {
+		@apply text-xl leading-8 mt-16 max-w-[1096px] flex flex-col gap-16 mx-auto;
+	}
+
+	.room-card-btn {
+		@apply mt-0.5 w-full h-14 font-black text-2xl bg-light text-maroonPrimary border border-dark-25;
+	}
+
+	.room-modal-btn {
+		@apply mt-0.5 w-full h-14 font-black text-2xl bg-maroonPrimary text-light;
+	}
+
+	.review-container {
+		@apply flex flex-col gap-6 w-full;
+	}
+
+	.review-card {
+		@apply w-full;
+	}
+
+	.form-input {
+		@apply flex flex-col gap-2;
+	}
+
+	.book-submit-btn {
+		@apply my-6 py-3 px-4 w-full h-20 font-black text-2xl bg-maroonPrimary text-light rounded-[3px];
 	}
 }

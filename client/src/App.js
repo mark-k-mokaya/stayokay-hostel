@@ -19,13 +19,7 @@ function App() {
 		<>
 			<Navbar />
 			<Routes>
-				{links.map((link, id) => (
-					<Route
-						key={id}
-						path={link.path}
-						element={<Home scrollTo={link.id} />}
-					/>
-				))}
+				<Route path="/" element={<Home />} />
 
 				{/* Routes to terms and conditions and admin screen to check reviews.*/}
 			</Routes>

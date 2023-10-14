@@ -18,7 +18,6 @@ const scrollTo = (id) => () => {
 	section ? section.scrollIntoView() : window.scrollTo({top: 0, left: 0});
 };
 
-
 // Update URL on scroll
 // window.addEventListener('scroll', function () {
 // 	const footer = document.getElementById('about');
@@ -49,7 +48,7 @@ export const Navbar = () => {
 				{links.map((link) => (
 					<Link
 						key={link.id}
-						to={link.path}
+						to="/"
 						onClick={scrollTo(link.id)}
 						className="hover:text-maroonPrimary">
 						{link.name}
@@ -58,7 +57,7 @@ export const Navbar = () => {
 
 				<button
 					as={Link}
-					to="/book"
+					to="/"
 					onClick={scrollTo('#book')}
 					className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">
 					BOOK NOW
@@ -82,9 +81,7 @@ export const Navbar = () => {
 				id="menu"
 				className="hidden absolute left-0 top-0 h-screen w-screen z-50">
 				{/* Background */}
-				<div
-					id="menu-bg"
-					className="w-full h-full  bg-black bg-opacity-80"></div>
+				<div id="menu-bg" className="w-full h-full  bg-dark-75"></div>
 
 				{/* Menu */}
 				<div className="absolute right-0 top-0 z-60 h-full w-8/12 md:w-5/12 bg-white">

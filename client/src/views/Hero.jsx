@@ -4,6 +4,10 @@ import {Link} from 'react-router-dom';
 export const Hero = () => {
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const scrollTo = (id) => () => {
+		const section = document.querySelector(id);
+		section ? section.scrollIntoView() : window.scrollTo({top: 0, left: 0});
+	};
 
 	// slideshow
 	useEffect(() => {
@@ -18,7 +22,7 @@ export const Hero = () => {
 		setTimeout(() => {
 			setCurrentSlide(currentSlide + 1 < slides.length ? currentSlide + 1 : 0);
 		}, 4000);
-	}, [currentSlide]);
+	}, [currentSlide, slides]);
 
 	return (
 		<section id="Hero" className="p-0 h-[110vh]">
@@ -38,8 +42,9 @@ export const Hero = () => {
 							</h1>
 							<button
 								as={Link}
-								to="/contact"
-								className="w-72 xl:w-[450px] h-16 mx-auto xl:mx-0 mt-8 font-body font-bold text-[20px] rounded-[3px] bg-light text-maroonSecondary uppercase">
+								to="/"
+								onClick={scrollTo('#book')}
+								className="w-72 xl:w-[450px] h-16 mx-auto xl:mx-0 mt-8 font-bold text-[20px] bg-light text-maroonSecondary">
 								Book a Short Stay
 							</button>
 						</div>
@@ -49,25 +54,25 @@ export const Hero = () => {
 				<div id="slider" className="relative flex flex-1 mt-26 bg-dark-100">
 					<div
 						id="slide-1"
-						className="bg-[url('../public/img/hero-building.png')] slide z-4">
+						className="bg-[url('./assets/img/hero-building.png')] slide z-4">
 						<h3 className="slide-text">WELCOME TO STAYOKAY</h3>
 					</div>
 
 					<div
 						id="slide-2"
-						className="hidden bg-[url('../public/img/hero-bed.png')] slide">
+						className="hidden bg-[url('./assets/img/hero-bed.png')] slide">
 						<h3 className="slide-text">SELF CONTAINED ROOMS</h3>
 					</div>
 
 					<div
 						id="slide-3"
-						className="hidden bg-[url('../public/img/hero-kitchen.png')] slide">
+						className="hidden bg-[url('./assets/img/hero-kitchen.png')] slide">
 						<h3 className="slide-text">FULLY EQUIPPED KITCHEN</h3>
 					</div>
 
 					<div
 						id="slide-4"
-						className="hidden bg-[url('../public/img/hero-parking.png')] slide">
+						className="hidden bg-[url('./assets/img/hero-parking.png')] slide">
 						<h3 className="slide-text">SPACIOUS PARKING AREA</h3>
 					</div>
 				</div>

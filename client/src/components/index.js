@@ -1,4 +1,10 @@
 export {Navbar} from './Navbar';
 export {SectionHeading} from './SectionHeading';
 export {Divider} from './Divider';
-
+export {Feature} from './Feature';
+export {RoomCard} from './RoomCard';
+export {Modal} from './Modal';
+export {RoomModal} from './RoomModal';
+export {ReviewCard} from './ReviewCard';
+export {FormInput} from './FormInput';
+export {Footer} from './Footer';
