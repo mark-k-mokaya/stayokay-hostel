@@ -49,7 +49,7 @@ export const Book = forwardRef(function Book(props, ref) {
 			setFormErrors(initialValues);
 			setIsSubmitting(false);
 		}
-	}, [formErrors]);
+	}, [formErrors, formValues, isSubmitting]);
 
 	return (
 		<section id="book" className="section-container" ref={ref}>

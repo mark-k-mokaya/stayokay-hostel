@@ -15,21 +15,6 @@ export const Navbar = ({links}) => {
 		setShowMenu(false);
 	};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	const handleNavigate = async (path) => {
 		const foundLink = links.find((link) => link.path === path);
 		const foundCurrentLink = links.find((link) => link.path === currentPath);

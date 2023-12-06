@@ -8,7 +8,7 @@ import {
 	Book,
 	Contact,
 } from '../views';
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useCallback} from 'react';
 import ScrollContext from '../context/scroll';
 import {Divider, Footer} from '../components';
 
@@ -16,16 +16,20 @@ export const Home = () => {
 	const {sectionRefs, currentPath, setCurrentPath, scrollTo} =
 		useContext(ScrollContext);
 
+	const updatePath = useCallback(() => {
+		setCurrentPath(() => window.location.pathname);
+	}, [setCurrentPath]);
+
 	useEffect(() => {
 		const handler = () => {
-			setCurrentPath(() => window.location.pathname);
+			updatePath();
 		};
 		window.addEventListener('popstate', handler);
 
 		return () => {
 			window.removeEventListener('popstate', handler);
 		};
-	}, []);
+	}, [updatePath]);
 
 	useEffect(() => {
 		scrollTo(currentPath);
