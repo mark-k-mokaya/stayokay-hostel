@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react';
+import {createContext, useState, useCallback} from 'react';
 import {fetchImages} from '../utils/fetchImages';
 
 const GalleryContext = createContext();
@@ -7,7 +7,7 @@ const GalleryProvider = ({children}) => {
 	const [gallery, setGallery] = useState('');
 	const [selectedIndex, setSelectedIndex] = useState(null);
 	// fetch Images
-	const createImagesList = (galleryType) => {
+	const createImagesList = useCallback((galleryType) => {
 		const images =
 			galleryType === 'shared'
 				? require.context('../assets/img/rooms/shared', false)
@@ -18,7 +18,7 @@ const GalleryProvider = ({children}) => {
 				: require.context('../assets/img/gallery', false);
 
 		return setGallery(fetchImages(images));
-	};
+	}, []);
 
 	const selectNext = () => {
 		setSelectedIndex(

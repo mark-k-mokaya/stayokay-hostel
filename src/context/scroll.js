@@ -1,4 +1,4 @@
-import {createContext, useRef, useState} from 'react';
+import {createContext, useRef, useState, useCallback} from 'react';
 
 const ScrollContext = createContext();
 const ScrollProvider = ({children}) => {
@@ -13,12 +13,12 @@ const ScrollProvider = ({children}) => {
 		book: useRef(),
 	});
 
-	const scrollTo = (path) => {
+	const scrollTo = useCallback((path) => {
 		const ref = path ? sectionRefs[path.substring(1)] : null;
 		ref
 			? ref.current.scrollIntoView({behavior: 'smooth'})
 			: window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-	};
+	}, [sectionRefs]);
 
 	return (
 		<ScrollContext.Provider

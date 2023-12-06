@@ -8,7 +8,7 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 
 	useEffect(() => {
 		createImagesList();
-	}, []);
+	}, [createImagesList]);
 
 	const [showModal, setShowModal] = useState(false);
 	const handleClick = (currentIndex) => {

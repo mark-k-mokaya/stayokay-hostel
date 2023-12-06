@@ -10,7 +10,7 @@ export const buildBookingRequest = (values) => {
 	const email = 'Email: ' + values.email;
 	const room = 'Room: ' + values.room + ' - ' + values.period_of_stay;
 	const dates =
-		'From: ' + values.check_in_date + '%0a' + 'To: ' + values.check_out_date;
+		'From: ' + values.check_in_date + '%0a To: ' + values.check_out_date;
 
 	return (
 		'https://wa.me/' +

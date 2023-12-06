@@ -1,4 +1,4 @@
-import {forwardRef, useEffect} from 'react';
+import {forwardRef} from 'react';
 import {SectionHeading} from '../components';
 
 export const About = forwardRef(function About(props, ref) {

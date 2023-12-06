@@ -29,7 +29,7 @@ export const Home = () => {
 
 	useEffect(() => {
 		scrollTo(currentPath);
-	}, [currentPath]);
+	}, [currentPath, scrollTo]);
 
 	return (
 		<main className="overflow-x-hidden">
