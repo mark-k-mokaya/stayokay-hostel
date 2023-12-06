@@ -1,5 +1,6 @@
 export const buildBookingRequest = (values) => {
-	const phoneNumber = process.env.REACT_APP_PHONE_NO;
+	// const phoneNumber = process.env.REACT_APP_PHONE_NO;
+	const phoneNumber = values.mobile_no;
 	const default_message =
 		'Hello *StayOkay Hostel Management*, I would like to book a stay.';
 
