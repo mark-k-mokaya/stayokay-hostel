@@ -6,3 +6,5 @@ export {Gallery} from './Gallery';
 export {Reviews} from './Reviews';
 export {Book} from './Book';
 export {Contact} from './Contact';
+export {Home} from './Home';
+export {Terms} from './Terms';

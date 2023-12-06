@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {
 	Hero,
 	About,
@@ -9,38 +8,46 @@ import {
 	Book,
 	Contact,
 } from '../views';
+import {useContext, useEffect} from 'react';
+import ScrollContext from '../context/scroll';
 import {Divider, Footer} from '../components';
 
-const Home = (props) => {
-	// useEffect(() => {
-	// 	if (props.scrollTo) {
-	// 		console.log(props.scrollTo);
-	// 		const section = document.querySelector(props.scrollTo);
-	// 		section && section.scrollIntoView();
-	// 	} else {
-	// 		window.scrollTo({top: 0, left: 0});
-	// 	}
-	// });
+export const Home = () => {
+	const {sectionRefs, currentPath, setCurrentPath, scrollTo} =
+		useContext(ScrollContext);
+
+	useEffect(() => {
+		const handler = () => {
+			setCurrentPath(() => window.location.pathname);
+		};
+		window.addEventListener('popstate', handler);
+
+		return () => {
+			window.removeEventListener('popstate', handler);
+		};
+	}, []);
+
+	useEffect(() => {
+		scrollTo(currentPath);
+	}, [currentPath]);
 
 	return (
 		<main className="overflow-x-hidden">
 			<Hero />
-			<About />
+			<About ref={sectionRefs.about} />
 			<Divider />
-			<Features />
+			<Features ref={sectionRefs.features} />
 			<Divider />
-			<Rooms />
+			<Rooms ref={sectionRefs.rooms} />
 			<Divider />
-			<Gallery />
+			<Gallery ref={sectionRefs.gallery} />
 			<Divider />
-			<Reviews />
+			<Reviews ref={sectionRefs.reviews} />
 			<Divider />
-			<Book />
+			<Book ref={sectionRefs.book} />
 			<Divider />
-			<Contact />
-			<Footer/>
+			<Contact ref={sectionRefs.contact} />
+			<Footer />
 		</main>
 	);
 };
-
-export default Home;

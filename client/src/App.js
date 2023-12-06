@@ -1,29 +1,27 @@
-import {Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {Navbar} from './components';
-import Home from './views/Home';
+import {Home, Terms} from './views';
+
+const links = [
+	{label: 'About StayOkay', path: '/about'},
+	{label: 'Why Choose Us?', path: '/features'},
+	{label: 'Rooms & Rates', path: '/rooms'},
+	{label: 'Gallery', path: '/gallery'},
+	{label: 'Reviews', path: '/reviews'},
+	{label: 'Contact Us', path: '/contact'},
+	{label: 'Book Now', path: '/book'},
+];
 
 function App() {
-	const links = [
-		{path: '/'},
-		{path: '/about', id: '#about'},
-		{path: '/features', id: '#features'},
-		{path: '/rooms', id: '#rooms'},
-		{path: '/gallery', id: '#gallery'},
-		{path: '/reviews', id: '#reviews'},
-		{path: '/contact', id: '#contact'},
-		{path: '/book', id: '#book'},
-		// {path: '/terms-and-conditions'},
-	];
-
 	return (
-		<>
-			<Navbar />
+		<BrowserRouter>
+			<Navbar links={links} />
 			<Routes>
 				<Route path="/" element={<Home />} />
-
-				{/* Routes to terms and conditions and admin screen to check reviews.*/}
+				<Route path="*" element={<Home />} />
+				<Route path="/terms" element={<Terms />} />
 			</Routes>
-		</>
+		</BrowserRouter>
 	);
 }
 

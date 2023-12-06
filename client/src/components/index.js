@@ -5,6 +5,7 @@ export {Feature} from './Feature';
 export {RoomCard} from './RoomCard';
 export {Modal} from './Modal';
 export {RoomModal} from './RoomModal';
+export {GalleryModal} from './GalleryModal';
 export {ReviewCard} from './ReviewCard';
 export {FormInput} from './FormInput';
 export {Footer} from './Footer';

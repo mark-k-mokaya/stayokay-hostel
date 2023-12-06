@@ -47,13 +47,12 @@
 
 @layer base {
 	html {
-		@apply scroll-smooth font-body text-dark-75 leading-6;
+		@apply scroll-smooth font-body text-dark-75 leading-6 text-base;
 	}
 
 	/* Containers */
 	section {
-		@apply py-32 px-12 xl:py-40 xl:px-44
-		/* border border-black */;
+		@apply py-32 px-12 xl:py-40 xl:px-44;
 	}
 
 	/* Typography */
@@ -68,26 +67,25 @@
 
 	h1,
 	h2 {
-		@apply font-extrabold text-5xl md:leading-[64px] md:text-[64px];
+		@apply font-extrabold text-[2.5rem] leading-[2.75rem] md:leading-[3.5rem] md:text-[3.5rem] xl:leading-[4rem] xl:text-[4rem];
 	}
 
 	h3 {
-		@apply font-bold text-4xl
-		md:text-5xl;
+		@apply font-bold text-3xl md:text-4xl xl:text-5xl;
 	}
 
 	h4 {
-		@apply font-bold text-[2.5rem] leading-10
+		@apply font-bold text-[2rem] leading-10
 		md:text-4xl;
 	}
 
 	h5 {
-		@apply font-black text-3xl leading-8
+		@apply font-black text-[1.75rem] leading-8
 		md:text-4xl md:leading-9;
 	}
 
 	h6 {
-		@apply font-black text-2xl leading-10;
+		@apply font-black text-2xl leading-6 md:leading-8;
 	}
 
 	button {
@@ -102,8 +100,8 @@
 	}
 
 	.slide-text {
-		@apply absolute bottom-[15%] right-0 py-5 px-4 rounded-l-sm
-		bg-dark-100  text-right text-light uppercase;
+		@apply absolute right-0 py-5 px-4 rounded-l-sm
+		bg-dark-100 w-full sm:w-fit text-light uppercase;
 	}
 
 	.pattern-divider {
@@ -111,7 +109,7 @@
 	}
 
 	.section-container {
-		@apply h-full flex flex-col items-center justify-center;
+		@apply h-full flex flex-col items-center justify-center bg-light;
 	}
 
 	.section-content {
@@ -119,11 +117,11 @@
 	}
 
 	.room-card-btn {
-		@apply mt-0.5 w-full h-14 font-black text-2xl bg-light text-maroonPrimary border border-dark-25;
+		@apply mt-0.5 w-full py-3 font-black text-2xl bg-light text-maroonPrimary border border-dark-25;
 	}
 
 	.room-modal-btn {
-		@apply mt-0.5 w-full h-14 font-black text-2xl bg-maroonPrimary text-light;
+		@apply mt-0.5 w-full py-3 font-black text-2xl bg-maroonPrimary text-light;
 	}
 
 	.review-container {
@@ -131,7 +129,7 @@
 	}
 
 	.review-card {
-		@apply w-full;
+		@apply inline-flex p-8 gap-6 flex-col justify-between border border-dark-10 rounded-3xl shadow-sm;
 	}
 
 	.form-input {
@@ -139,6 +137,20 @@
 	}
 
 	.book-submit-btn {
-		@apply my-6 py-3 px-4 w-full h-20 font-black text-2xl bg-maroonPrimary text-light rounded-[3px];
+		@apply my-6 py-5 px-4 w-full font-black text-xl bg-maroonPrimary text-light rounded-[3px];
+	}
+}
+
+@media screen and (min-width: 1920px) {
+	html {
+		@apply text-2xl;
+	}
+
+	.section-content {
+		@apply max-w-[80%];
+	}
+
+	#features .section-content div div {
+		@apply 2xl:w-[300px];
 	}
 }

@@ -1,32 +1,66 @@
-import SharedRoomImg from '../assets/img/rooms-shared-room.png';
-import Bed1 from '../assets/img/mini-gallery-bed-1.png';
-import Bed2 from '../assets/img/mini-gallery-bed-2.png';
-import Sink from '../assets/img/mini-gallery-sink.png';
-import Toilet from '../assets/img/mini-gallery-toilet.png';
-import Bathroom from '../assets/img/mini-gallery-bathroom.png';
-import PriceTagIcon from '../assets/img/rooms-price-tag-icon.png';
-import GuestsTagIcon from '../assets/img/rooms-guests-icon.png';
-import CloseIcon from '../assets/close-icon.png';
+import {useContext, useState} from 'react';
+import ScrollContext from '../context/scroll';
+import {Link, useNavigate} from 'react-router-dom';
+import PriceTagIcon from '../assets/img/icons/rooms-price-tag-icon.png';
+import GuestsTagIcon from '../assets/img/icons/rooms-guests-icon.png';
 
-export const RoomModal = () => {
+export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
+	const navigate = useNavigate();
+	const {setCurrentPath} = useContext(ScrollContext);
+
+	const handleScroll = () => {
+		setCurrentPath(() => '/book');
+		navigate('/book');
+		handleClick();
+	};
+
+	const [currentIndex, setCurrentIndex] = useState(0);
+	const currentImage = imagesList[currentIndex];
+
 	return (
-		<div className="relative flex flex-col items-start justify-start xl:flex-row xl:gap-12 w-[85%] xl:w-[80%] min-h-screen p-12 bg-light z-[60]">
-			<div className="absolute top-4 right-4 p-2 bg-light text-maroonPrimary border border-dark-25">
-				<img src={CloseIcon} className="w-8" />
-			</div>
+		<div className="flex flex-col md:flex-row gap-6 xl:gap-12">
 			{/* Images + Description */}
-			<div className="flex-1 w-full space-y-1">
+			<div className="flex-1 space-y-1 mt-10 xl:mt-0">
 				<div id="main-preview">
-					<img src={SharedRoomImg} className="rounded-[3px]" />
+					<img
+						src={currentImage.imageUrl}
+						className="w-full flex-1"
+						alt={currentImage.name.split('_')[1].split('-').join(' ')}
+					/>
 				</div>
-				<div
-					id="mini-gallery"
-					className="flex w-full overflow-hidden space-x-1">
-					<img src={Bed1} className="w-26 rounded-[3px]" />
-					<img src={Bed2} className="w-26 rounded-[3px]" />
-					<img src={Sink} className="w-26 rounded-[3px]" />
-					<img src={Toilet} className="w-26 rounded-[3px]" />
-					<img src={Bathroom} className="w-26 rounded-[3px]" />
+
+				<div id="mini-gallery" className={`grid grid-cols-6 w-full gap-1`}>
+					{imagesList.map((image, index) => {
+						const altText = image.name.split('_')[1].split('-').join(' ');
+						return (
+							<img
+								key={image.name}
+								src={image.imageUrl}
+								className={
+										image === currentImage
+											? 'border-4 border-maroonPrimary h-full'
+											: 'cursor-pointer h-full'
+									}
+								alt={altText}
+								onClick={() => setCurrentIndex(index)}
+							/>
+						);
+					})}
+				</div>
+
+				<h4 className="md:hidden text-maroonPrimary uppercase pt-3">
+					{rest.roomLabel}
+				</h4>
+
+				<div className="md:hidden gap-1.5 w-full flex flex-wrap pb-5">
+					<div className="bg-light border border-dark-10 p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap h-10">
+						<img src={PriceTagIcon} alt="" className="h-full" />
+						{rest.priceTagLabel}
+					</div>
+					<div className="bg-light border border-dark-10 p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap h-10">
+						<img src={GuestsTagIcon} alt="" className="h-full" />
+						{rest.guestsTagLabel}
+					</div>
 				</div>
 				<div
 					id="description"
@@ -34,78 +68,96 @@ export const RoomModal = () => {
 					<h6 className="text-maroonSecondary uppercase font-black">
 						DESCRIPTION
 					</h6>
-					<p className="py-2">
-						Make new friends in our cozy shared room, with comfortable single
-						beds and storage lockers for your belongings.
-					</p>
+					<p className="py-2 text-base">{rest.description}</p>
 				</div>
 			</div>
 
 			{/* Modal Content */}
-			<div className="flex flex-col gap-2 flex-1">
-				<h4 className="text-maroonPrimary uppercase">Shared Room</h4>
+			<div className="flex flex-col gap-1 flex-1 md:mt-10 xl:mt-0 justify-between">
+				<div className="">
+					<h4 className="hidden md:block text-maroonPrimary uppercase">
+						{rest.roomLabel}
+					</h4>
 
-				<div className="flex gap-1.5 w-full h-10">
-					<div className="bg-light border border-dark-10 p-2 flex gap-1.5 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-base">
-						<img src={PriceTagIcon} alt="" className="h-full" />
-						from Ksh. 1,000 each
+					<div className="hidden md:flex gap-1.5 w-full flex-wrap">
+						<div className="bg-light border border-dark-10 p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap h-10">
+							<img src={PriceTagIcon} alt="" className="h-full" />
+							{rest.priceTagLabel}
+						</div>
+						<div className="bg-light border border-dark-10 p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap h-10">
+							<img src={GuestsTagIcon} alt="" className="h-full" />
+							{rest.guestsTagLabel}
+						</div>
 					</div>
-					<div className="bg-light border border-dark-10 p-2 flex gap-1.5 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-base">
-						<img src={GuestsTagIcon} alt="" className="h-full" />2 guests
+
+					<h6 className="text-maroonSecondary uppercase">Key Features</h6>
+					<div className="border-t border-dark-10 p-6">
+						<ul className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-8">
+							{/* Add key prop */}
+							{rest.features.map((item) => (
+								<li className="list-disc" key={item + new Date().getTime()}>
+									{item}
+								</li>
+							))}
+						</ul>
+					</div>
+
+					<h6 className="text-maroonSecondary uppercase">Amount</h6>
+
+					<div className="border-t border-dark-10  divide-y divide-dark-10 uppercase">
+						<div className="py-2">
+							<p className="text-xl text-maroonSecondary font-bold">
+								Most Popular
+							</p>
+							<h5 className="text-maroonPrimary grid grid-cols-2">
+								<span className="break-words">Short Stay</span>
+								<span className="text-right">
+									KSH. {rest.amount.short_stay.toLocaleString()}
+								</span>
+							</h5>
+							<p className="grid grid-cols-2">
+								<span>Stay for 1 night</span>
+								<span className="text-right">
+									{rest.rate_conditions.short_stay}
+								</span>
+							</p>
+						</div>
+						<div className="py-2">
+							<h6 className="text-maroonSecondary grid grid-cols-2">
+								<span className="break-words">Half Month</span>
+								<span className="text-right">
+									KSH. {rest.amount.half_month.toLocaleString()}
+								</span>
+							</h6>
+
+							<p className="grid grid-cols-2">
+								<span>Stay for 2 weeks</span>
+								<span className="text-right">
+									{rest.rate_conditions.half_month}
+								</span>
+							</p>
+						</div>
+						<div className="py-2">
+							<h6 className="text-maroonSecondary grid grid-cols-2">
+								<span className="break-words">Full Month</span>
+								<span className="text-right">
+									KSH. {rest.amount.full_month.toLocaleString()}
+								</span>
+							</h6>
+							<p className="grid grid-cols-2">
+								<span>Stay for 1 month</span>
+								<span className="text-right">
+									{rest.rate_conditions.full_month}
+								</span>
+							</p>
+						</div>
 					</div>
 				</div>
-
-				<h6 className="text-maroonSecondary uppercase">Key Features</h6>
-
-				<div className="border-t border-dark-10 p-6">
-					<ul className="flex flex-wrap gap-y-2 columns-2">
-						<li className="w-1/2 list-disc">2 x Single beds</li>
-						<li className="w-1/2 list-disc">2 x Reading desks</li>
-						<li className="w-1/2 list-disc">Wardrobe</li>
-						<li className="w-1/2 list-disc">Tea & coffee for short stay</li>
-						<li className="w-1/2 list-disc">Hot showers</li>
-						<li className="w-1/2 list-disc">Toiletries</li>
-						<li className="w-1/2 list-disc">Room cleaning</li>
-					</ul>
+				<div>
+					<button className="room-modal-btn" as={Link} onClick={handleScroll}>
+						Book Now
+					</button>
 				</div>
-
-				<h6 className="text-maroonSecondary uppercase">Amount</h6>
-
-				<div className="border-t border-dark-10  divide-y divide-dark-10 uppercase">
-					<div className="py-2">
-						<p className="text-xl text-maroonSecondary font-bold">
-							Most Popular
-						</p>
-						<h5 className="text-maroonPrimary grid grid-cols-2">
-							<span className="break-words">Shortstay</span>
-							<span className="text-right">KSH. 1,000</span>
-						</h5>
-						<p className="grid grid-cols-2">
-							<span>Stay for 1 night</span>
-							<span className="text-right">PRICE PER PERSON</span>
-						</p>
-					</div>
-					<div className="py-2">
-						<h6 className="text-maroonSecondary grid grid-cols-2">
-							<span className="break-words">Half Month</span>
-							<span className="text-right">KSH. 5,500</span>
-						</h6>
-
-						<p className="grid grid-cols-2">
-							<span>Stay for 2 weeks</span>
-						</p>
-					</div>
-					<div className="py-2">
-					<h6 className="text-maroonSecondary grid grid-cols-2">
-							<span className="break-words">Full Month</span>
-							<span className="text-right">KSH. 8,500</span>
-						</h6>
-						<p className="grid grid-cols-2">
-							<span>Stay for 1 month</span>
-						</p>
-					</div>
-				</div>
-				<button className="room-modal-btn">Book Now</button>
 			</div>
 		</div>
 	);

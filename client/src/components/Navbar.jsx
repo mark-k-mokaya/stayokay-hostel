@@ -1,52 +1,62 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import MobileMenu from './MobileMenu';
-import {Link} from 'react-router-dom';
-import {ReactComponent as StayOkayLogo} from '../assets/Logo.svg';
+import {Link, useNavigate} from 'react-router-dom';
+import {ReactComponent as StayOkayLogo} from '../assets/img/Logo.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faBars, faXmark} from '@fortawesome/free-solid-svg-icons';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
+import ScrollContext from '../context/scroll';
 
-const links = [
-	{name: 'About StayOkay', path: '/about', id: '#about'},
-	{name: 'Why Choose Us?', path: '/features', id: '#features'},
-	{name: 'Rooms & Rates', path: '/rooms', id: '#rooms'},
-	{name: 'Gallery', path: '/gallery', id: '#gallery'},
-	{name: 'Reviews', path: '/reviews', id: '#reviews'},
-	{name: 'Contact Us', path: '/contact', id: '#contact'},
-	{name: 'Book Now', path: '/book', id: '#book'},
-	// {name: 'Terms', path: '/terms-and-conditions'},
-];
-
-const scrollTo = (id) => () => {
-	const section = document.querySelector(id);
-	section ? section.scrollIntoView() : window.scrollTo({top: 0, left: 0});
-};
-
-// Update URL on scroll
-// window.addEventListener('scroll', function () {
-// 	const footer = document.getElementById('about');
-
-// 	const checkIsVisible = (element) => {
-// 		const rect = element.getBoundingClientRect();
-// 		if (rect.bottom <= window.innerHeight) {
-// 			console.log('I see you!');
-// 		}
-// 	};
-
-// 	checkIsVisible(footer);
-// });
-
-export const Navbar = () => {
+export const Navbar = ({links}) => {
+	const navigate = useNavigate();
 	const [showMenu, setShowMenu] = useState(false);
+	const {scrollTo, setCurrentPath, currentPath} = useContext(ScrollContext);
 
 	const hideMenu = () => {
 		setShowMenu(false);
 	};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	const handleNavigate = async (path) => {
+		const foundLink = links.find((link) => link.path === path);
+		const foundCurrentLink = links.find((link) => link.path === currentPath);
+		if (
+			(foundCurrentLink || currentPath === '/') &&
+			(foundLink || path === '/') &&
+			currentPath !== path
+		) {
+			await setCurrentPath(() => path);
+			navigate(path);
+			scrollTo(path);
+		} else if (
+			(foundCurrentLink || currentPath === '/') &&
+			(foundLink || path === '/')
+		) {
+			scrollTo(path);
+		} else {
+			await setCurrentPath(() => path);
+			navigate(path);
+		}
+	};
+
 	return (
 		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
 			{/* Logo */}
-			<Link to="/" onClick={scrollTo()}>
-				<StayOkayLogo className="" />
+			<Link onClick={() => handleNavigate('/')}>
+				<StayOkayLogo className="w-full h-full" />
 			</Link>
 
 			{/* Links */}
@@ -55,20 +65,18 @@ export const Navbar = () => {
 				className="
 			hidden items-center justify-evenly space-x-6 leading-6 font-semibold text-base text-maroonSecondary xl:flex">
 				{links.map((link) =>
-					link.id != '#book' ? (
+					link.path !== '/book' ? (
 						<Link
-							key={link.id}
-							to="/"
-							onClick={scrollTo(link.id)}
+							key={link.path}
+							onClick={() => handleNavigate(link.path)}
 							className="hover:text-maroonPrimary">
-							{link.name}
+							{link.label}
 						</Link>
 					) : (
 						<button
-							key={link.id}
+							key={link.path}
 							as={Link}
-							to="/"
-							onClick={scrollTo(link.id)}
+							onClick={() => handleNavigate(link.path)}
 							className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">
 							BOOK NOW
 						</button>
@@ -91,7 +99,13 @@ export const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			{showMenu && <MobileMenu links={links} hideMenu={hideMenu} />}
+			{showMenu && (
+				<MobileMenu
+					links={links}
+					hideMenu={hideMenu}
+					handleNavigate={handleNavigate}
+				/>
+			)}
 		</nav>
 	);
 };

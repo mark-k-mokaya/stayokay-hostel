@@ -1,35 +1,62 @@
-import PriceTagIcon from '../assets/img/rooms-price-tag-icon.png';
-import GuestsTagIcon from '../assets/img/rooms-guests-icon.png';
+import PriceTagIcon from '../assets/img/icons/rooms-price-tag-icon.png';
+import GuestsTagIcon from '../assets/img/icons/rooms-guests-icon.png';
+import {RoomModal} from './RoomModal';
+import {useContext, useState, useEffect} from 'react';
+import RoomsContext from '../context/rooms';
 
 export const RoomCard = ({
-	roomType,
 	roomImg,
-	description,
-	priceTagLabel,
-	guestsTagLabel,
-	handleClick
+	roomType,
+	handleClick,
+	setModal,
+	...rest
 }) => {
-	return (
-		<div className="flex flex-col gap-3.5">
-			<div className="relative">
-				<div className="absolute flex justify-end gap-1.5 bottom-0 mb-2 px-2 z-10 w-full h-10">
-					<div className="bg-light border border-dark-10 p-2 flex gap-1.5 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-base">
-						<img src={PriceTagIcon} alt="" className="h-full" />
-						{priceTagLabel}
-					</div>
-					<div className="bg-light border border-dark-10 p-2 flex gap-1.5 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-base">
-						<img src={GuestsTagIcon} alt="" className="h-full" />
-						{guestsTagLabel}
-					</div>
-				</div>
-				<img src={roomImg} className="rounded-[3px]" alt={roomType} />
-			</div>
+	const createImagesList = useContext(RoomsContext)[1];
 
-			<h5 className="uppercase text-maroonPrimary font-extrabold">
-				{roomType}
-			</h5>
-			<p className="text-base">{description}</p>
-			<button className="room-card-btn" onClick={handleClick}>SHOW DETAILS</button>
+	// fetch images
+	const [imagesList, setImagesList] = useState([]);
+
+	useEffect(() => {
+		const images = createImagesList(roomType);
+		setImagesList(images);
+	}, [createImagesList, roomType]);
+
+	const handleModal = () => {
+		setModal(
+			<RoomModal
+				roomType={roomType}
+				handleClick={handleClick}
+				imagesList={imagesList}
+				{...rest}
+			/>
+		);
+		handleClick();
+	};
+	return (
+		<div className="flex flex-col gap-3.5 justify-between">
+			<div className="flex flex-col gap-3.5">
+				<div className="relative">
+					<div className="absolute flex flex-wrap justify-end gap-1.5 bottom-0 mb-1 md:mb-2 px-1 md:px-2 z-10 w-full">
+						<div className="h-8 md:h-10 bg-light border border-dark-10 p-1 md:p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap">
+							<img src={PriceTagIcon} alt="" className="h-4 md:h-full" />
+							{rest.priceTagLabel}
+						</div>
+						<div className="h-8 md:h-10 bg-light border border-dark-10 p-1 md:p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap">
+							<img src={GuestsTagIcon} alt="" className="h-4 md:h-full" />
+							{rest.guestsTagLabel}
+						</div>
+					</div>
+					<img src={roomImg} className="rounded-[3px]" alt={rest.roomLabel} />
+				</div>
+
+				<h5 className="uppercase text-maroonPrimary font-extrabold">
+					{rest.roomLabel}
+				</h5>
+				<p className="text-base">{rest.description}</p>
+			</div>
+			<button className="room-card-btn" onClick={handleModal}>
+				SHOW DETAILS
+			</button>
 		</div>
 	);
 };

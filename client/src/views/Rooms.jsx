@@ -1,18 +1,20 @@
-import {useState} from 'react';
+import {useState, useContext, forwardRef} from 'react';
+import RoomsContext from '../context/rooms';
 import {SectionHeading, RoomCard, Modal} from '../components';
-import SharedRoomImg from '../assets/img/rooms-shared-room.png';
-import DeluxeRoomImg from '../assets/img/rooms-deluxe-room.png';
-import FamilyRoomImg from '../assets/img/rooms-family-room.png';
+import SharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.png';
+import DeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.png';
+import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
 
-export const Rooms = () => {
+export const Rooms = forwardRef(function Rooms(props, ref) {
+	const rooms = useContext(RoomsContext)[0];
 	const [showModal, setShowModal] = useState(false);
-
+	const [modal, setModal] = useState(null);
 	const handleClick = () => {
-		setShowModal(!showModal);
+		setShowModal((showModal) => !showModal);
 	};
 	return (
-		<section id="rooms" className="relative">
-			{showModal && <Modal handleClick={handleClick} />}
+		<section id="rooms" className="relative section-container" ref={ref}>
+			{showModal && <Modal modal={modal} handleClick={handleClick} />}
 			{/* Section Heading */}
 			<SectionHeading
 				sub="TAKE YOUR PICK, WE'VE GOT PLENTY"
@@ -31,35 +33,25 @@ export const Rooms = () => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<RoomCard
-						roomType="SHARED ROOM"
 						roomImg={SharedRoomImg}
-						priceTagLabel={'from Ksh. 1,000 each'}
-						guestsTagLabel={'2'}
-						description="Make new friends in our cozy shared room, with comfortable single
-							beds and storage lockers for your belongings."
+						{...rooms.shared}
 						handleClick={handleClick}
+						setModal={setModal}
 					/>
 					<RoomCard
-						roomType="DELUXE ROOM"
 						roomImg={DeluxeRoomImg}
-						priceTagLabel={'from Ksh. 2,500'}
-						guestsTagLabel={'1-2'}
-						description="Treat yourself to a luxurious stay in our deluxe room, featuring
-							premium amenities, queen-size beds and so much more."
+						{...rooms.deluxe}
 						handleClick={handleClick}
+						setModal={setModal}
 					/>
 					<RoomCard
-						roomType="FAMILY ROOM"
 						roomImg={FamilyRoomImg}
-						priceTagLabel={'from Ksh. 3,500'}
-						guestsTagLabel={'4'}
-						description="Enjoy quality time with your loved ones in our spacious family
-							room, featuring comfortable beds, ample storage, and plenty of
-							space for everyone to relax and unwind."
+						{...rooms.family}
 						handleClick={handleClick}
+						setModal={setModal}
 					/>
 				</div>
 			</div>
 		</section>
 	);
-};
+});

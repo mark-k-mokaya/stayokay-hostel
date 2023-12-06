@@ -1,0 +1,88 @@
+{
+	"shared": {
+		"roomType": "shared",
+		"roomLabel": "Shared Room",
+		"guestsTagLabel": "2 guests",
+		"priceTagLabel": "from Ksh. 1,000 each",
+		"amount": {
+			"short_stay": 1000,
+			"half_month": 5500,
+			"full_month": 8500
+		},
+		"rate_conditions": {
+			"short_stay": "Price per person",
+			"half_month": "",
+			"full_month": ""
+		},
+		"features": [
+			"2 x Single beds",
+			"Hot showers",
+			"2 x Reading desks",
+			"Toiletries",
+			"Wardrobe",
+			"Room cleaning",
+			"Tea & coffee for short stay"
+		],
+		"description": "Make new friends in our cozy shared room, with comfortable single beds and storage lockers for your belongings."
+	},
+
+	"family": {
+		"roomType": "family",
+		"roomLabel": "Family Room",
+		"guestsTagLabel": "4 guests",
+		"priceTagLabel": "from Ksh. 3,500",
+		"amount": {
+			"short_stay": 3500,
+			"half_month": 12000,
+			"full_month": 20000
+		},
+		"rate_conditions": {
+			"short_stay": "",
+			"half_month": "",
+			"full_month": ""
+		},
+		"features": [
+			"1 x King Size Bed",
+			"1 x Double Decker Bed",
+			"Hot Showers",
+			"TV",
+			"1 x Sofa Set",
+			"1 x Fridge",
+			"Wardrobe",
+			"Room cleaning",
+			"Tea & Coffee for short stay",
+			"Toiletries"
+		],
+		"description": "Enjoy quality time with your loved ones in our spacious family room, featuring comfortable beds, ample storage, and plenty of room for everyone to relax and unwind."
+	},
+
+	"deluxe": {
+		"roomType": "deluxe",
+		"roomLabel": "Deluxe Room",
+		"guestsTagLabel": "1-2 guests",
+		"priceTagLabel": "from Ksh. 2,500",
+		"amount": {
+			"short_stay": 2500,
+			"half_month": 10000,
+			"full_month": 18500
+		},
+		"rate_conditions": {
+			"short_stay": "",
+			"half_month": "",
+			"full_month": ""
+		},
+		"features": [
+			"2 x Queen size beds",
+			"1 x Arm Chair",
+			"Hot showers",
+			"TV",
+			"2 x Reading desks",
+			"1 x Fridge",
+			"Wardrobe",
+			"Room cleaning",
+			"Tea & Coffee for short stay",
+			"Toiletries"
+		],
+		"description": "Treat yourself to a luxurious stay in our deluxe room, featuring premium amenities, queen-size beds and so much more."
+	}
+}

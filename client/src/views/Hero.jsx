@@ -1,13 +1,20 @@
-import {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {useEffect, useState, forwardRef, useContext} from 'react';
+import ScrollContext from '../context/scroll';
+import {Link, useNavigate} from 'react-router-dom';
+import {fetchImages} from '../utils/fetchImages';
 
-export const Hero = () => {
+export const Hero = forwardRef(function Hero(props, ref) {
+	const navigate = useNavigate();
+	const {setCurrentPath} = useContext(ScrollContext);
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
-	const scrollTo = (id) => () => {
-		const section = document.querySelector(id);
-		section ? section.scrollIntoView() : window.scrollTo({top: 0, left: 0});
-	};
+
+	// fetch images
+	const [imagesList, setImagesList] = useState([]);
+	useEffect(() => {
+		const images = require.context('../assets/img/hero', false);
+		setImagesList(fetchImages(images));
+	}, []);
 
 	// slideshow
 	useEffect(() => {
@@ -25,58 +32,54 @@ export const Hero = () => {
 	}, [currentSlide, slides]);
 
 	return (
-		<section id="Hero" className="p-0 h-[110vh]">
+		<section id="Hero" className="p-0 h-screen xl:h-[110vh] relative" ref={ref}>
 			<div className="flex flex-col xl:flex-row h-full bg-pattern bg-maroonSecondary">
 				{/* Hero Content Section */}
-				<div className="relative flex items-center justify-center w-full xl:w-[640px] 2xl:w-5/12 h-screen xl:h-full">
+				<div className="absolute xl:relative flex items-center justify-center w-full xl:w-[640px] 2xl:w-5/12 h-[100%] xl:h-full z-10 xl:z-0 ">
 					{/* Background overlay */}
-					<div className="w-full h-full flex items-center pt-26 pb-10 bg-maroonSecondary bg-opacity-10">
+					<div className="absolute inset-0 flex items-center pt-26 pb-10 xl:bg-maroonSecondary xl:bg-opacity-10">
 						{/* Content */}
-						<div className="flex flex-col m-auto">
+						<div className="flex relative flex-col m-auto xl:bg-transparent p-0 sm:p-4 rounded-[3px]">
+							<div className="absolute inset-0 blur-md bg-dark-10 -z-10"></div>
 							<h1 className="font-bold text-light text-center xl:text-left transform">
 								BOOK YOUR STAY
-								<span className="block w-fit mx-auto my-1.5 p-1.5 pr-2 rounded-[3px] bg-dark-100 tracking-[-0.025rem] xl:mx-0">
+								<span className="flex my-1.5 bg-dark-100 px-1 py-2 rounded-[3px]">
 									FROM KSH. 1,000
 								</span>
 								PER NIGHT
 							</h1>
 							<button
 								as={Link}
-								to="/"
-								onClick={scrollTo('#book')}
-								className="w-72 xl:w-[450px] h-16 mx-auto xl:mx-0 mt-8 font-bold text-[20px] bg-light text-maroonSecondary">
+								onClick={() => {
+									setCurrentPath(() => '/book')
+									navigate('/book')}}
+								className="w-72 xl:w-[450px] h-16 mx-auto xl:mx-0 mt-8 font-bold text-xl bg-light text-maroonSecondary hover:text-maroonPrimary">
 								Book a Short Stay
 							</button>
 						</div>
 					</div>
 				</div>
 				{/* Hero Slider Section*/}
-				<div id="slider" className="relative flex flex-1 mt-26 bg-dark-100">
-					<div
-						id="slide-1"
-						className="bg-[url('./assets/img/hero-building.png')] slide z-4">
-						<h3 className="slide-text">WELCOME TO STAYOKAY</h3>
-					</div>
-
-					<div
-						id="slide-2"
-						className="hidden bg-[url('./assets/img/hero-bed.png')] slide">
-						<h3 className="slide-text">SELF CONTAINED ROOMS</h3>
-					</div>
-
-					<div
-						id="slide-3"
-						className="hidden bg-[url('./assets/img/hero-kitchen.png')] slide">
-						<h3 className="slide-text">FULLY EQUIPPED KITCHEN</h3>
-					</div>
-
-					<div
-						id="slide-4"
-						className="hidden bg-[url('./assets/img/hero-parking.png')] slide">
-						<h3 className="slide-text">SPACIOUS PARKING AREA</h3>
-					</div>
+				<div
+					id="slider"
+					className="relative w-full xl:w-auto mx-auto xl:m-0 xl:flex flex-1 mt-26 bg-dark-100">
+					{imagesList.map((image, index) => {
+						const slideText = image.name.split('_')[1].split('-').join(' ');
+						return (
+							<div
+								key={image.name}
+								id={`slide-${index + 1}`}
+								className={`slide z-4 bg-center xl:bg-left`}
+								style={{backgroundImage: `url(${image.imageUrl})`}}>
+								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
+								<h3 className="slide-text bottom-0 text-center sm:text-right xl:bottom-[15%]">
+									{slideText}
+								</h3>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</section>
 	);
-};
+});

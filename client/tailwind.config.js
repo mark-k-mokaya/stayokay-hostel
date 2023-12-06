@@ -25,7 +25,7 @@ module.exports = {
 				heading: ['Outfit', 'sans-serif'],
 			},
 			backgroundImage: () => ({
-				pattern: "url('./assets/pattern.png')",
+				pattern: "url('./assets/img/pattern.png')",
 			}),
 		},
 	},
