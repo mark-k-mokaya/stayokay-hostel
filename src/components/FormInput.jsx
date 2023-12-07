@@ -1,6 +1,6 @@
 export const FormInput = ({name, label, type, error, options, ...rest}) => {
 	return (
-		<div className="form-input">
+		<div className="form-input flex-1">
 			<label htmlFor={name} className="text-xl text-maroonPrimary">
 				{label}
 			</label>
@@ -11,7 +11,7 @@ export const FormInput = ({name, label, type, error, options, ...rest}) => {
 					id={name}
 					name={name}
 					placeholder=""
-					className="h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
+					className="w-full h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
 					{...rest}
 				/>
 			) : (
@@ -19,7 +19,7 @@ export const FormInput = ({name, label, type, error, options, ...rest}) => {
 					id={name}
 					name={name}
 					placeholder=""
-					className="h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
+					className="w-full h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
 					{...rest}>
 					<option></option>
 					{options.map((option) => (

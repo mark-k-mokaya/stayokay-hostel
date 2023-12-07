@@ -1,8 +1,8 @@
 import {useContext} from 'react';
 import GalleryContext from '../context/gallery';
 import CloseIcon from '../assets/img/close-icon.png';
-import RightChevron from '../assets/img/right-chevron-icon.svg';
-import LeftChevron from '../assets/img/left-chevron-icon.svg';
+import {ReactComponent as RightChevron} from '../assets/img/right-chevron-icon.svg';
+import {ReactComponent as LeftChevron} from '../assets/img/left-chevron-icon.svg';
 
 export const Modal = ({modal, handleClick}) => {
 	const {selectNext, selectPrev} = useContext(GalleryContext);

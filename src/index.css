@@ -133,7 +133,7 @@
 	}
 
 	.form-input {
-		@apply flex flex-col gap-2;
+		@apply flex flex-col gap-y-2;
 	}
 
 	.book-submit-btn {
