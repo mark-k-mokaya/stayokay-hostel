@@ -1,8 +1,8 @@
 import {useContext} from 'react';
 import GalleryContext from '../context/gallery';
 import CloseIcon from '../assets/img/close-icon.png';
-import {ReactComponent as RightChevron} from '../assets/img/right-chevron-icon.svg';
-import {ReactComponent as LeftChevron} from '../assets/img/left-chevron-icon.svg';
+import RightChevronIcon from '../assets/img/right-chevron-icon.png';
+import LeftChevronIcon from '../assets/img/left-chevron-icon.png';
 
 export const Modal = ({modal, handleClick}) => {
 	const {selectNext, selectPrev} = useContext(GalleryContext);
@@ -25,12 +25,12 @@ export const Modal = ({modal, handleClick}) => {
 						<div
 							className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 							onClick={selectPrev}>
-							<img src={LeftChevron} width={50} alt="Previous" />
+							<img src={LeftChevronIcon} width={50} alt="Previous" />
 						</div>
 						<div
 							className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 							onClick={selectNext}>
-							<img src={RightChevron} width={50} alt="Next" />
+							<img src={RightChevronIcon} width={50} alt="Next" />
 						</div>
 					</div>
 				)}
@@ -41,12 +41,12 @@ export const Modal = ({modal, handleClick}) => {
 					<div
 						className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 						onClick={selectPrev}>
-						<img src={LeftChevron} width={50} alt="Previous" />
+						<img src={LeftChevronIcon} width={50} alt="Previous" />
 					</div>
 					<div
 						className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 						onClick={selectNext}>
-						<img src={RightChevron} width={50} alt="Next" />
+						<img src={RightChevronIcon} width={50} alt="Next" />
 					</div>
 				</div>
 			)}
