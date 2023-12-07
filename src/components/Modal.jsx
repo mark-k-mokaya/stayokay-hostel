@@ -20,7 +20,7 @@ export const Modal = ({modal, modalType, handleClick}) => {
 					<img src={CloseIcon} width={32} alt="Close" />
 				</div>
 				{modal}
-				{modalType === 'GalleryModal' && (
+				{modalType === 'gallery' && (
 					<div className="flex md:self-center w-full md:hidden justify-between z-[80]">
 						<div
 							className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
@@ -36,7 +36,7 @@ export const Modal = ({modal, modalType, handleClick}) => {
 				)}
 			</div>
 
-			{modalType === 'GalleryModal' && (
+			{modalType === 'gallery' && (
 				<div className="hidden md:self-center w-full md:fixed md:flex justify-between z-[80]">
 					<div
 						className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
