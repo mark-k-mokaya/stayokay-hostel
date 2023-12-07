@@ -19,7 +19,7 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 	return (
 		<section id="gallery" className="relative section-container" ref={ref}>
 			{showModal && (
-				<Modal modal={<GalleryModal />} handleClick={handleClick} />
+				<Modal modal={<GalleryModal />} modalType="gallery" handleClick={handleClick} />
 			)}
 			<SectionHeading sub="WE'VE GOT PICTURES TOO" main="GALLERY" />
 

@@ -4,7 +4,7 @@ import CloseIcon from '../assets/img/close-icon.png';
 import RightChevronIcon from '../assets/img/right-chevron-icon.png';
 import LeftChevronIcon from '../assets/img/left-chevron-icon.png';
 
-export const Modal = ({modal, handleClick}) => {
+export const Modal = ({modal, modalType, handleClick}) => {
 	const {selectNext, selectPrev} = useContext(GalleryContext);
 	return (
 		<div className="fixed flex items-start justify-center z-40 inset-0 w-screen h-screen overflow-y-auto bg-dark-50 self-center">
@@ -20,8 +20,8 @@ export const Modal = ({modal, handleClick}) => {
 					<img src={CloseIcon} width={32} alt="Close" />
 				</div>
 				{modal}
-				{modal.type.name === 'GalleryModal' && (
-					<div className="flex md:self-center w-full md:hidden justify-between z-[60]">
+				{modalType === 'GalleryModal' && (
+					<div className="flex md:self-center w-full md:hidden justify-between z-[80]">
 						<div
 							className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 							onClick={selectPrev}>
@@ -36,8 +36,8 @@ export const Modal = ({modal, handleClick}) => {
 				)}
 			</div>
 
-			{modal.type.name === 'GalleryModal' && (
-				<div className="hidden md:self-center w-full md:fixed md:flex justify-between z-[60]">
+			{modalType === 'GalleryModal' && (
+				<div className="hidden md:self-center w-full md:fixed md:flex justify-between z-[80]">
 					<div
 						className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 						onClick={selectPrev}>

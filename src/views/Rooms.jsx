@@ -6,7 +6,7 @@ import DeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.png';
 import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
 
 export const Rooms = forwardRef(function Rooms(props, ref) {
-	const rooms = useContext(RoomsContext)[0];
+	const {rooms} = useContext(RoomsContext);
 	const [showModal, setShowModal] = useState(false);
 	const [modal, setModal] = useState(null);
 	const handleClick = () => {
@@ -14,7 +14,9 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 	};
 	return (
 		<section id="rooms" className="relative section-container" ref={ref}>
-			{showModal && <Modal modal={modal} handleClick={handleClick} />}
+			{showModal && (
+				<Modal modal={modal} modalType="room" handleClick={handleClick} />
+			)}
 			{/* Section Heading */}
 			<SectionHeading
 				sub="TAKE YOUR PICK, WE'VE GOT PLENTY"

@@ -11,7 +11,7 @@ export const RoomCard = ({
 	setModal,
 	...rest
 }) => {
-	const createImagesList = useContext(RoomsContext)[1];
+	const {createImagesList} = useContext(RoomsContext);
 
 	// fetch images
 	const [imagesList, setImagesList] = useState([]);

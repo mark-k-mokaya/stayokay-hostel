@@ -18,7 +18,7 @@ const RoomsProvider = ({children}) => {
 	}, []);
 
 	return (
-		<RoomsContext.Provider value={[rooms, createImagesList]}>
+		<RoomsContext.Provider value={{rooms, createImagesList}}>
 			{children}
 		</RoomsContext.Provider>
 	);
