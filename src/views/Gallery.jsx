@@ -34,15 +34,14 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 						gallery.map((image, index) => {
 							const altText = image.name.split('_')[1].split('-').join(' ');
 							return (
-								<picture key={image.name}>
+								<picture key={image.name} className="cursor-pointer">
 									<source srcSet={image.imageUrl} type="image/webp" />
 									<img
-										loading='lazy'
+										loading="lazy"
 										fetchPriority="low"
 										src={image.fallbackImageUrl}
 										alt={altText}
 										onClick={() => handleClick(index)}
-										className="cursor-pointer"
 									/>
 								</picture>
 							);

@@ -21,7 +21,7 @@ export const Modal = ({modal, modalType, handleClick}) => {
 				</div>
 				{modal}
 				{modalType === 'gallery' && (
-					<div className="flex md:self-center w-full md:hidden justify-between z-[80]">
+					<div className="flex md:self-center w-full md:hidden justify-between z-[80] ">
 						<div
 							className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 							onClick={selectPrev}>

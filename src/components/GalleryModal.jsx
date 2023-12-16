@@ -13,13 +13,14 @@ export const GalleryModal = () => {
 					<div
 						id="main-preview"
 						className="w-full flex justify-center items-center mt-14 md:mt-6">
-						<picture key={currentImage.name}>
+						<picture
+							key={currentImage.name}
+							className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]">
 							<source srcSet={currentImage.imageUrl} type="image/webp" />
 							<img
 								loading="lazy"
 								key={currentImage.name}
 								src={currentImage.fallbackImageUrl}
-								className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]"
 								alt={currentImage.name.split('_')[1].split('-').join(' ')}
 							/>
 						</picture>
@@ -31,17 +32,17 @@ export const GalleryModal = () => {
 						{gallery.map((image, index) => {
 							const altText = image.name.split('_')[1].split('-').join(' ');
 							return (
-								<picture key={image.name}>
+								<picture
+									key={image.name}
+									className={
+										image === currentImage
+											? 'border-4 border-maroonPrimary'
+											: 'cursor-pointer'
+									}>
 									<source srcSet={image.imageUrl} type="image/webp" />
 									<img
-										loading="lazy"
 										key={image.name}
 										src={image.fallbackImageUrl}
-										className={
-											image === currentImage
-												? 'border-4 border-maroonPrimary'
-												: 'cursor-pointer'
-										}
 										alt={altText}
 										width={100}
 										onClick={() => setSelectedIndex(index)}

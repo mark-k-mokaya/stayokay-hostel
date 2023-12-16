@@ -44,12 +44,11 @@ export const RoomCard = ({
 							{rest.guestsTagLabel}
 						</div>
 					</div>
-					<picture>
+					<picture className="rounded-[3px]">
 						<source srcSet={roomImg.imageUrl} type="image/webp" />
 						<img
 							loading="lazy"
 							src={roomImg.fallbackImageUrl}
-							className="rounded-[3px]"
 							alt={rest.roomLabel}
 						/>
 					</picture>

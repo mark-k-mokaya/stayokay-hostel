@@ -23,12 +23,11 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 			{/* Images + Description */}
 			<div className="flex-1 space-y-1 mt-10 xl:mt-0">
 				<div id="main-preview">
-					<picture key={currentImage.name}>
+					<picture key={currentImage.name} className="w-full flex-1">
 						<source srcSet={currentImage.imageUrl} type="image/webp" />
 						<img
 							loading="lazy"
 							src={currentImage.fallbackImageUrl}
-							className="w-full flex-1"
 							alt={currentImage.name.split('_')[1].split('-').join(' ')}
 						/>
 					</picture>
@@ -38,17 +37,18 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 					{imagesList.map((image, index) => {
 						const altText = image.name.split('_')[1].split('-').join(' ');
 						return (
-							<picture key={image.name}>
+							<picture
+								key={image.name}
+								className={
+									image === currentImage
+										? 'border-4 border-maroonPrimary h-full'
+										: 'cursor-pointer h-full'
+								}>
 								<source srcSet={image.imageUrl} type="image/webp" />
 								<img
 									loading="lazy"
 									key={image.name}
 									src={image.fallbackImageUrl}
-									className={
-										image === currentImage
-											? 'border-4 border-maroonPrimary h-full'
-											: 'cursor-pointer h-full'
-									}
 									alt={altText}
 									onClick={() => setCurrentIndex(index)}
 								/>
