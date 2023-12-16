@@ -6,11 +6,12 @@ import GuestsTagIcon from '../assets/img/icons/rooms-guests-icon.png';
 
 export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 	const navigate = useNavigate();
-	const {setCurrentPath} = useContext(ScrollContext);
+	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
 
-	const handleScroll = () => {
-		setCurrentPath(() => '/book');
-		navigate('/book');
+	const handleScroll = async () => {
+		await setCurrentPath(() => '/book');
+		window.location.pathname !== '/book' && navigate('/book');
+		scrollTo('/book');
 		handleClick();
 	};
 
@@ -22,28 +23,34 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 			{/* Images + Description */}
 			<div className="flex-1 space-y-1 mt-10 xl:mt-0">
 				<div id="main-preview">
-					<img
-						src={currentImage.imageUrl}
-						className="w-full flex-1"
-						alt={currentImage.name.split('_')[1].split('-').join(' ')}
-					/>
+					<picture key={currentImage.name}>
+						<source srcSet={currentImage.imageUrl} type="image/webp" />
+						<img
+							src={currentImage.fallbackImageUrl}
+							className="w-full flex-1"
+							alt={currentImage.name.split('_')[1].split('-').join(' ')}
+						/>
+					</picture>
 				</div>
 
 				<div id="mini-gallery" className={`grid grid-cols-6 w-full gap-1`}>
 					{imagesList.map((image, index) => {
 						const altText = image.name.split('_')[1].split('-').join(' ');
 						return (
-							<img
-								key={image.name}
-								src={image.imageUrl}
-								className={
+							<picture key={image.name}>
+								<source srcSet={image.imageUrl} type="image/webp" />
+								<img
+									key={image.name}
+									src={image.fallbackImageUrl}
+									className={
 										image === currentImage
 											? 'border-4 border-maroonPrimary h-full'
 											: 'cursor-pointer h-full'
 									}
-								alt={altText}
-								onClick={() => setCurrentIndex(index)}
-							/>
+									alt={altText}
+									onClick={() => setCurrentIndex(index)}
+								/>
+							</picture>
 						);
 					})}
 				</div>

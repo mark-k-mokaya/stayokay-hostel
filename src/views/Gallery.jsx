@@ -19,7 +19,11 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 	return (
 		<section id="gallery" className="relative section-container" ref={ref}>
 			{showModal && (
-				<Modal modal={<GalleryModal />} modalType="gallery" handleClick={handleClick} />
+				<Modal
+					modal={<GalleryModal />}
+					modalType="gallery"
+					handleClick={handleClick}
+				/>
 			)}
 			<SectionHeading sub="WE'VE GOT PICTURES TOO" main="GALLERY" />
 
@@ -30,13 +34,17 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 						gallery.map((image, index) => {
 							const altText = image.name.split('_')[1].split('-').join(' ');
 							return (
-								<img
-									key={image.name}
-									src={image.imageUrl}
-									alt={altText}
-									onClick={() => handleClick(index)}
-									className="cursor-pointer"
-								/>
+								<picture key={image.name}>
+									<source srcSet={image.imageUrl} type="image/webp" />
+									<img
+										loading='lazy'
+										fetchPriority="low"
+										src={image.fallbackImageUrl}
+										alt={altText}
+										onClick={() => handleClick(index)}
+										className="cursor-pointer"
+									/>
+								</picture>
 							);
 						})}
 				</div>

@@ -2,12 +2,30 @@ import {useEffect, useState, forwardRef, useContext} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
+import supportsWebP from 'supports-webp';
 
 export const Hero = forwardRef(function Hero(props, ref) {
 	const navigate = useNavigate();
-	const {setCurrentPath} = useContext(ScrollContext);
+	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [hasWebP, setHasWebP] = useState(false);
+
+	useEffect(() => async () => {
+		supportsWebP.then((supported) => {
+			if (supported) {
+				setHasWebP(true);
+			} else {
+				setHasWebP(false);
+			}
+		});
+	});
+
+	const handleScroll = async () => {
+		await setCurrentPath(() => '/book');
+		window.location.pathname !== '/book' && navigate('/book');
+		scrollTo('/book');
+	};
 
 	// fetch images
 	const [imagesList, setImagesList] = useState([]);
@@ -50,9 +68,7 @@ export const Hero = forwardRef(function Hero(props, ref) {
 							</h1>
 							<button
 								as={Link}
-								onClick={() => {
-									setCurrentPath(() => '/book')
-									navigate('/book')}}
+								onClick={handleScroll}
 								className="w-72 xl:w-[450px] h-16 mx-auto xl:mx-0 mt-8 font-bold text-xl bg-light text-maroonSecondary hover:text-maroonPrimary">
 								Book a Short Stay
 							</button>
@@ -70,7 +86,11 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								key={image.name}
 								id={`slide-${index + 1}`}
 								className={`slide z-4 bg-center xl:bg-left`}
-								style={{backgroundImage: `url(${image.imageUrl})`}}>
+								style={
+									hasWebP
+										? {backgroundImage: `url(${image.imageUrl})`}
+										: {backgroundImage: `url(${image.fallbackImageUrl})`}
+								}>
 								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
 								<h3 className="slide-text bottom-0 text-center sm:text-right xl:bottom-[15%]">
 									{slideText}

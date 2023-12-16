@@ -46,7 +46,14 @@ export const RoomCard = ({
 							{rest.guestsTagLabel}
 						</div>
 					</div>
-					<img src={roomImg} className="rounded-[3px]" alt={rest.roomLabel} />
+					<picture>
+						<source srcSet={roomImg.imageUrl} type="image/webp" />
+						<img
+							src={roomImg.fallbackImageUrl}
+							className="rounded-[3px]"
+							alt={rest.roomLabel}
+						/>
+					</picture>
 				</div>
 
 				<h5 className="uppercase text-maroonPrimary font-extrabold">
