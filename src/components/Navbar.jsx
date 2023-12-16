@@ -40,7 +40,7 @@ export const Navbar = ({links}) => {
 	return (
 		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
 			{/* Logo */}
-			<Link onClick={() => handleNavigate('/')}>
+			<Link onClick={() => handleNavigate('/')} aria-label="Home">
 				<StayOkayLogo className="w-full h-full" />
 			</Link>
 
@@ -73,6 +73,7 @@ export const Navbar = ({links}) => {
 			<div id="menu-btn" className="block xl:hidden my-auto">
 				<button
 					className="flex items-center justify-center p-5 space-x-3 group"
+					aria-label="Menu"
 					onClick={() => {
 						setShowMenu(true);
 					}}>
