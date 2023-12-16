@@ -1,4 +1,4 @@
-import {useEffect, useState, forwardRef, useContext} from 'react';
+import {useEffect, useState, forwardRef, useContext, useRef} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
@@ -10,8 +10,9 @@ export const Hero = forwardRef(function Hero(props, ref) {
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [hasWebP, setHasWebP] = useState(false);
+	const slider = useRef();
 
-	useEffect(() => async () => {
+	useEffect(() => {
 		supportsWebP.then((supported) => {
 			if (supported) {
 				setHasWebP(true);
@@ -19,7 +20,7 @@ export const Hero = forwardRef(function Hero(props, ref) {
 				setHasWebP(false);
 			}
 		});
-	});
+	}, []);
 
 	const handleScroll = async () => {
 		await setCurrentPath(() => '/book');
@@ -77,6 +78,7 @@ export const Hero = forwardRef(function Hero(props, ref) {
 				</div>
 				{/* Hero Slider Section*/}
 				<div
+					ref={slider}
 					id="slider"
 					className="relative w-full xl:w-auto mx-auto xl:m-0 xl:flex flex-1 mt-26 bg-dark-100">
 					{imagesList.map((image, index) => {
@@ -86,11 +88,18 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								key={image.name}
 								id={`slide-${index + 1}`}
 								className={`slide z-4 bg-center xl:bg-left`}
-								style={
-									hasWebP
-										? {backgroundImage: `url(${image.imageUrl})`}
-										: {backgroundImage: `url(${image.fallbackImageUrl})`}
-								}>
+								// style={
+								// 	hasWebP
+								// 		? {backgroundImage: `url(${image.imageUrl})`}
+								// 		: {backgroundImage: `url(${image.fallbackImageUrl})`}
+								// }
+								// 								style={{
+								// 									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${image.imageUrl}/resize?size=${slider.current.offsetHeight}&auth=NTc2MjM4MDcz
+								// )`
+								style={{
+									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${image.imageUrl}/resize?size=200&auth=NTc2MjM4MDcz
+)`,
+								}}>
 								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
 								<h3 className="slide-text bottom-0 text-center sm:text-right xl:bottom-[15%]">
 									{slideText}
