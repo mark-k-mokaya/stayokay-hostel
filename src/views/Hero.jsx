@@ -2,25 +2,25 @@ import {useEffect, useState, forwardRef, useContext, useRef} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
-import supportsWebP from 'supports-webp';
+// import supportsWebP from 'supports-webp';
 
 export const Hero = forwardRef(function Hero(props, ref) {
 	const navigate = useNavigate();
 	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
-	const [hasWebP, setHasWebP] = useState(false);
+	// const [hasWebP, setHasWebP] = useState(false);
 	const slider = useRef();
 
-	useEffect(() => {
-		supportsWebP.then((supported) => {
-			if (supported) {
-				setHasWebP(true);
-			} else {
-				setHasWebP(false);
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	supportsWebP.then((supported) => {
+	// 		if (supported) {
+	// 			setHasWebP(true);
+	// 		} else {
+	// 			setHasWebP(false);
+	// 		}
+	// 	});
+	// }, []);
 
 	const handleScroll = async () => {
 		await setCurrentPath(() => '/book');
