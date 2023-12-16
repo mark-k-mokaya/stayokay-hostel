@@ -2,25 +2,42 @@ import {useEffect, useState, forwardRef, useContext, useRef} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
-// import supportsWebP from 'supports-webp';
+import supportsWebP from 'supports-webp';
 
 export const Hero = forwardRef(function Hero(props, ref) {
 	const navigate = useNavigate();
 	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
-	// const [hasWebP, setHasWebP] = useState(false);
+	const [hasWebP, setHasWebP] = useState(false);
 	const slider = useRef();
 
-	// useEffect(() => {
-	// 	supportsWebP.then((supported) => {
-	// 		if (supported) {
-	// 			setHasWebP(true);
-	// 		} else {
-	// 			setHasWebP(false);
-	// 		}
-	// 	});
-	// }, []);
+	const breakpoint = (size) => {
+		switch (true) {
+			case size <= 640:
+				return 640;
+			case size <= 768:
+				return 768;
+			case size <= 1024:
+				return 1024;
+			case size <= 1280:
+				return 1280;
+			case size <= 1536:
+				return 1536;
+			default:
+				return size;
+		}
+	};
+
+	useEffect(() => {
+		supportsWebP.then((supported) => {
+			if (supported) {
+				setHasWebP(true);
+			} else {
+				setHasWebP(false);
+			}
+		});
+	}, []);
 
 	const handleScroll = async () => {
 		await setCurrentPath(() => '/book');
@@ -88,16 +105,12 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								key={image.name}
 								id={`slide-${index + 1}`}
 								className={`slide z-4 bg-center xl:bg-left`}
-								// style={
-								// 	hasWebP
-								// 		? {backgroundImage: `url(${image.imageUrl})`}
-								// 		: {backgroundImage: `url(${image.fallbackImageUrl})`}
-								// }
-								// 								style={{
-								// 									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${image.imageUrl}/resize?size=${slider.current.offsetHeight}&auth=NTc2MjM4MDcz
-								// )`
 								style={{
-									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${image.imageUrl}/resize?size=200&auth=NTc2MjM4MDcz
+									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${
+										hasWebP ? image.imageUrl : image.fallbackImageUrl
+									}/resize?size=${breakpoint(
+										slider.current.offsetHeight
+									)}&auth=NTc2MjM4MDcz
 )`,
 								}}>
 								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
