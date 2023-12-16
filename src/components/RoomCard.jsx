@@ -12,8 +12,6 @@ export const RoomCard = ({
 	...rest
 }) => {
 	const {createImagesList} = useContext(RoomsContext);
-
-	// fetch images
 	const [imagesList, setImagesList] = useState([]);
 
 	useEffect(() => {
@@ -49,6 +47,7 @@ export const RoomCard = ({
 					<picture>
 						<source srcSet={roomImg.imageUrl} type="image/webp" />
 						<img
+							loading="lazy"
 							src={roomImg.fallbackImageUrl}
 							className="rounded-[3px]"
 							alt={rest.roomLabel}

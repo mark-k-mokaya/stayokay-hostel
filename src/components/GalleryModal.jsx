@@ -16,6 +16,7 @@ export const GalleryModal = () => {
 						<picture key={currentImage.name}>
 							<source srcSet={currentImage.imageUrl} type="image/webp" />
 							<img
+								loading="lazy"
 								key={currentImage.name}
 								src={currentImage.fallbackImageUrl}
 								className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]"
@@ -33,7 +34,7 @@ export const GalleryModal = () => {
 								<picture key={image.name}>
 									<source srcSet={image.imageUrl} type="image/webp" />
 									<img
-										loading='lazy'
+										loading="lazy"
 										key={image.name}
 										src={image.fallbackImageUrl}
 										className={

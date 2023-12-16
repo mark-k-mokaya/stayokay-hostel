@@ -26,6 +26,7 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 					<picture key={currentImage.name}>
 						<source srcSet={currentImage.imageUrl} type="image/webp" />
 						<img
+							loading="lazy"
 							src={currentImage.fallbackImageUrl}
 							className="w-full flex-1"
 							alt={currentImage.name.split('_')[1].split('-').join(' ')}
@@ -40,6 +41,7 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 							<picture key={image.name}>
 								<source srcSet={image.imageUrl} type="image/webp" />
 								<img
+									loading="lazy"
 									key={image.name}
 									src={image.fallbackImageUrl}
 									className={
