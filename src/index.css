@@ -106,7 +106,7 @@
 	}
 
 	.slide-text {
-		@apply absolute right-0 py-5 px-4 rounded-l-sm
+		@apply absolute right-0 py-5 px-4 rounded-none sm:rounded-l-sm
 		bg-dark-100 w-full sm:w-fit text-light uppercase;
 	}
 

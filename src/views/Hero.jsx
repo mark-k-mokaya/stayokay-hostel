@@ -2,7 +2,7 @@ import {useEffect, useState, forwardRef, useContext, useRef} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
-import supportsWebP from 'supports-webp';
+import supportsWebP from 'supports-webp' 
 
 export const Hero = forwardRef(function Hero(props, ref) {
 	const navigate = useNavigate();
@@ -11,6 +11,7 @@ export const Hero = forwardRef(function Hero(props, ref) {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [hasWebP, setHasWebP] = useState(false);
 	const slider = useRef();
+	const key = process.env.REACT_APP_PIX_BOOST_KEY;
 
 	const breakpoint = (size) => {
 		switch (true) {
@@ -106,11 +107,12 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								id={`slide-${index + 1}`}
 								className={`slide z-4 bg-center xl:bg-left`}
 								style={{
+									display: index > 0 && 'hidden',
 									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${
 										hasWebP ? image.imageUrl : image.fallbackImageUrl
 									}/resize?size=${breakpoint(
 										slider.current.offsetHeight
-									)}&auth=NTc2MjM4MDcz
+									)}&auth=${key}
 )`,
 								}}>
 								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
