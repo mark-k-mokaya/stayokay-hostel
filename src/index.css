@@ -145,6 +145,46 @@
 	.book-submit-btn {
 		@apply my-6 py-5 px-4 w-full font-black text-xl bg-maroonPrimary text-light rounded-[3px];
 	}
+
+	ol {
+		list-style: decimal;
+		counter-reset: item;
+	}
+
+	ol > li:before {
+		content: counters(item, '.') ' ';
+		counter-increment: item;
+		@apply font-bold leading-6 md:leading-8;
+	}
+
+	ol.main-list{
+		@apply flex flex-col gap-12 divide-y-2 border-t-2;
+	}
+
+	li.main-list-item {
+		@apply flex flex-col gap-6 py-6;
+	}
+
+	li.main-list-item:has(> h6):before {
+		content: '';
+	}
+	.sub-list {
+		@apply flex flex-col gap-6;
+	}
+
+	li.sub-list-item {
+		@apply block;
+	}
+	li.sub-list-item ul,
+	li.sub-list-item p {
+		@apply py-3;
+	}
+	li.sub-list-item > strong {
+		@apply inline-block p-3 break-words;
+	}
+	li.sub-list-item > ul, ul.sub-list {
+		@apply px-8 list-disc flex flex-col gap-3;
+	}
 }
 
 @media screen and (min-width: 1920px) {

@@ -52,6 +52,7 @@ export const Navbar = ({links}) => {
 				{links.map((link) =>
 					link.path !== '/book' ? (
 						<Link
+							to={link.path}
 							key={link.path}
 							onClick={() => handleNavigate(link.path)}
 							className="hover:text-maroonPrimary">
@@ -61,6 +62,7 @@ export const Navbar = ({links}) => {
 						<button
 							key={link.path}
 							as={Link}
+							to={link.path}
 							onClick={() => handleNavigate(link.path)}
 							className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">
 							BOOK NOW

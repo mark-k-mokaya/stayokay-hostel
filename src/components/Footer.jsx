@@ -6,7 +6,11 @@ export const Footer = () => {
 				<p>
 					&copy; {new Date().getFullYear()} StayOkay Hostels Kisii.{' '}
 					<br className="block sm:hidden" />
-					All Rights Reserved.
+					All Rights Reserved. Read our{' '}
+					<a href="/terms" className="underline">
+						Terms & Conditions
+					</a>
+					.
 				</p>
 				<p>
 					Powered by{' '}

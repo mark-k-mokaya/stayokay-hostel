@@ -45,7 +45,7 @@ export const Contact = forwardRef(function Contact(props, ref) {
 							<p>
 								<strong>Phone:</strong> +254 722 394 133
 							</p>
-							<p>
+							<p className='break-all'>
 								<strong>Email:</strong> stayokayhostelkisii@gmail.com
 							</p>
 						</div>

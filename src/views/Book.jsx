@@ -169,9 +169,9 @@ export const Book = forwardRef(function Book(props, ref) {
 					<div className="text-base text-maroonSecondary font-medium text-center">
 						<p>Payments are made during check-in.</p>
 						<p>
-							Kindly take a moment to review the{' '}
+							Kindly take a moment to review {' '}
 							<a href="/terms" className="underline">
-								Stayokay Hostel Policies
+								Stayokay Hostel's Terms & Conditions
 							</a>
 							.
 						</p>

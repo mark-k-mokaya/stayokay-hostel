@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	theme: {
@@ -21,8 +23,8 @@ module.exports = {
 				'dark-10': 'rgba(28, 29, 33, .1)',
 			},
 			fontFamily: {
-				body: ['Poppins', 'sans-serif'],
-				heading: ['Outfit', 'sans-serif'],
+				body: ['Poppins', ...defaultTheme.fontFamily.sans],
+				heading: ['Outfit', ...defaultTheme.fontFamily.sans],
 			},
 			backgroundImage: () => ({
 				pattern: "url('./assets/img/pattern.png')",
