@@ -157,7 +157,7 @@
 		@apply font-bold leading-6 md:leading-8;
 	}
 
-	ol.main-list{
+	ol.main-list {
 		@apply flex flex-col gap-12 divide-y-2 border-t-2;
 	}
 
@@ -182,7 +182,8 @@
 	li.sub-list-item > strong {
 		@apply inline-block p-3 break-words;
 	}
-	li.sub-list-item > ul, ul.sub-list {
+	li.sub-list-item > ul,
+	ul.sub-list {
 		@apply px-8 list-disc flex flex-col gap-3;
 	}
 }

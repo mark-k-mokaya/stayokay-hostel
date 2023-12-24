@@ -25,6 +25,7 @@ const MobileMenu = ({hideMenu, links, handleNavigate}) => {
 						link.path !== '/book' ? (
 							<Link
 								key={link.path}
+								to={link.path}
 								onClick={() => onNavigate(link.path)}
 								className="hover:text-maroonPrimary">
 								{link.label}
@@ -32,6 +33,7 @@ const MobileMenu = ({hideMenu, links, handleNavigate}) => {
 						) : (
 							<button
 								key={link.path}
+								to={link.path}
 								as={Link}
 								onClick={() => onNavigate(link.path)}
 								className="w-40 h-12 py-3 px-4 rounded-[3px] bg-maroonPrimary text-white font-bold">

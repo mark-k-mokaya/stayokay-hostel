@@ -33,8 +33,8 @@ export const RoomCard = ({
 	return (
 		<div className="flex flex-col gap-3.5 justify-between">
 			<div className="flex flex-col gap-3.5">
-				<div className="relative">
-					<div className="absolute flex flex-wrap justify-end gap-1.5 bottom-0 mb-1 md:mb-2 px-1 md:px-2 z-10 w-full">
+				<div className="relative bg-gray-100">
+					<div className="absolute flex flex-wrap justify-end gap-1.5 bottom-2 md:bottom-4 mb-1 md:mb-2 px-1 md:px-2 z-10 w-full">
 						<div className="h-8 md:h-10 bg-light border border-dark-10 p-1 md:p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap">
 							<img src={PriceTagIcon} alt="" className="h-4 md:h-full" />
 							{rest.priceTagLabel}
@@ -44,12 +44,21 @@ export const RoomCard = ({
 							{rest.guestsTagLabel}
 						</div>
 					</div>
-					<picture className="rounded-[3px]">
+					<picture>
 						<source srcSet={roomImg.imageUrl} type="image/webp" />
 						<img
 							loading="lazy"
 							src={roomImg.fallbackImageUrl}
 							alt={rest.roomLabel}
+							className="rounded-[3px] opacity-0 transition-opacity duration-200 ease-in-out"
+							onLoad={(event) => {
+								event.target.classList.add('opacity-100');
+							}}
+							width={
+								document.body.offsetWidth > 768
+									? document.body.offsetWidth / 2 - 176 + 14
+									: document.body.offsetWidth - 48 - 48
+							}
 						/>
 					</picture>
 				</div>

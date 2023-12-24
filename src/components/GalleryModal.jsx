@@ -13,13 +13,14 @@ export const GalleryModal = () => {
 					<div
 						id="main-preview"
 						className="w-full flex justify-center items-center mt-14 md:mt-6">
-						<picture
-							key={currentImage.name}
-							className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]">
+						<picture className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]">
 							<source srcSet={currentImage.imageUrl} type="image/webp" />
 							<img
+								className="opacity-0 transition-opacity duration-200 ease-in-out"
+								onLoad={(event) => {
+									event.target.classList.add('opacity-100');
+								}}
 								loading="lazy"
-								key={currentImage.name}
 								src={currentImage.fallbackImageUrl}
 								alt={currentImage.name.split('_')[1].split('-').join(' ')}
 							/>
@@ -32,22 +33,28 @@ export const GalleryModal = () => {
 						{gallery.map((image, index) => {
 							const altText = image.name.split('_')[1].split('-').join(' ');
 							return (
-								<picture
+								<span
 									key={image.name}
 									className={
 										image === currentImage
-											? 'border-4 border-maroonPrimary'
-											: 'cursor-pointer'
+											? 'bg-gray-100 border-4 border-maroonPrimary h-fit w-fit flex'
+											: 'bg-gray-100 cursor-pointer h-fit'
 									}>
-									<source srcSet={image.imageUrl} type="image/webp" />
-									<img
-										key={image.name}
-										src={image.fallbackImageUrl}
-										alt={altText}
-										width={100}
-										onClick={() => setSelectedIndex(index)}
-									/>
-								</picture>
+									<picture>
+										<source srcSet={image.imageUrl} type="image/webp" />
+										<img
+											className="opacity-0 transition-opacity duration-200 ease-in-out"
+											onLoad={(event) => {
+												event.target.classList.add('opacity-100');
+											}}
+											loading="lazy"
+											width={100}
+											src={image.fallbackImageUrl}
+											alt={altText}
+											onClick={() => setSelectedIndex(index)}
+										/>
+									</picture>
+								</span>
 							);
 						})}
 					</div>

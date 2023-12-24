@@ -22,11 +22,14 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 		<div className="flex flex-col md:flex-row gap-6 xl:gap-12">
 			{/* Images + Description */}
 			<div className="flex-1 space-y-1 mt-10 xl:mt-0">
-				<div id="main-preview">
-					<picture key={currentImage.name} className="w-full flex-1">
+				<div id="main-preview" className="bg-gray-100">
+					<picture className="w-full flex-1">
 						<source srcSet={currentImage.imageUrl} type="image/webp" />
 						<img
-							loading="lazy"
+							className="opacity-0 transition-opacity duration-200 ease-in-out"
+							onLoad={(event) => {
+								event.target.classList.add('opacity-100');
+							}}
 							src={currentImage.fallbackImageUrl}
 							alt={currentImage.name.split('_')[1].split('-').join(' ')}
 						/>
@@ -37,22 +40,27 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 					{imagesList.map((image, index) => {
 						const altText = image.name.split('_')[1].split('-').join(' ');
 						return (
-							<picture
+							<span
 								key={image.name}
 								className={
 									image === currentImage
-										? 'border-4 border-maroonPrimary h-full'
-										: 'cursor-pointer h-full'
+										? 'bg-gray-100 border-4 border-maroonPrimary h-fit w-fit flex'
+										: 'bg-gray-100 cursor-pointer h-fit'
 								}>
-								<source srcSet={image.imageUrl} type="image/webp" />
-								<img
-									loading="lazy"
-									key={image.name}
-									src={image.fallbackImageUrl}
-									alt={altText}
-									onClick={() => setCurrentIndex(index)}
-								/>
-							</picture>
+								<picture>
+									<source srcSet={image.imageUrl} type="image/webp" />
+									<img
+										className="w-full flex-1 opacity-0 transition-opacity duration-200 ease-in-out"
+										onLoad={(event) => {
+											event.target.classList.add('opacity-100');
+										}}
+										loading="lazy"
+										src={image.fallbackImageUrl}
+										alt={altText}
+										onClick={() => setCurrentIndex(index)}
+									/>
+								</picture>
+							</span>
 						);
 					})}
 				</div>

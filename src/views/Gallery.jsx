@@ -1,11 +1,10 @@
 import {useContext, useState, useEffect, forwardRef} from 'react';
 import {SectionHeading, Modal, GalleryModal} from '../components';
-import GalleryContext from '../context/gallery';
+import GalleryContext from '../context/gallery'
 
 export const Gallery = forwardRef(function Gallery(props, ref) {
 	const {gallery, createImagesList, setSelectedIndex} =
 		useContext(GalleryContext);
-
 	useEffect(() => {
 		createImagesList();
 	}, [createImagesList]);
@@ -34,16 +33,25 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 						gallery.map((image, index) => {
 							const altText = image.name.split('_')[1].split('-').join(' ');
 							return (
-								<picture key={image.name} className="cursor-pointer">
-									<source srcSet={image.imageUrl} type="image/webp" />
-									<img
-										loading="lazy"
-										fetchPriority="low"
-										src={image.fallbackImageUrl}
-										alt={altText}
-										onClick={() => handleClick(index)}
-									/>
-								</picture>
+								<div
+									key={image.name}
+									className='bg-gray-100'>
+									<picture className="cursor-pointer">
+										<source srcSet={image.imageUrl} type="image/webp" />
+										<img
+											className="opacity-0 transition-opacity duration-200 ease-in-out object-contain"
+											onLoad={(event) => {
+												event.target.classList.add('opacity-100');
+											}}
+											width={300}
+											height={300}
+											loading="lazy"
+											src={image.fallbackImageUrl}
+											alt={altText}
+											onClick={() => handleClick(index)}
+										/>
+									</picture>
+								</div>
 							);
 						})}
 				</div>
