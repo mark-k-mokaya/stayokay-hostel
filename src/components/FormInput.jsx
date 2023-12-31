@@ -1,4 +1,12 @@
-export const FormInput = ({name, label, type, error, options, ...rest}) => {
+export const FormInput = ({
+	name,
+	label,
+	type,
+	error,
+	options,
+	className,
+	...rest
+}) => {
 	return (
 		<div className="form-input flex-1">
 			<label htmlFor={name} className="text-xl text-maroonPrimary">
@@ -11,7 +19,11 @@ export const FormInput = ({name, label, type, error, options, ...rest}) => {
 					id={name}
 					name={name}
 					placeholder=""
-					className="w-full h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
+					className={`
+						w-full h-12 py-0 px-4 rounded-[3px] border bg-light outline-none ${
+							error ? 'border-error ' : 'border-dark-25 '
+						} ${className}
+					`}
 					{...rest}
 				/>
 			) : (
@@ -19,7 +31,11 @@ export const FormInput = ({name, label, type, error, options, ...rest}) => {
 					id={name}
 					name={name}
 					placeholder=""
-					className="w-full h-12 py-0 px-4 rounded-[3px] border border-dark-25 bg-light outline-none"
+					className={`
+						w-full h-12 py-0 px-4 rounded-[3px] border bg-light outline-none ${
+							error ? 'border-error ' : 'border-dark-25 '
+						} ${className}
+					`}
 					{...rest}>
 					<option></option>
 					{options.map((option) => (

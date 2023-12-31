@@ -12,16 +12,27 @@ const initialValues = {
 	check_in_date: '',
 	check_out_date: '',
 	room: '',
-	period_of_stay: '',
+	type_of_stay: '',
 	mobile_no: '',
 	email: '',
 };
 
-const date = new Date();
-let day = date.getDate();
-let month = date.getMonth() + 1;
-let year = date.getFullYear();
-let currentDate = `${year}-${month}-${day}`;
+const fetchDate = (selectedDate) => {
+	const date = selectedDate ? new Date(selectedDate) : new Date();
+	const day = ('0' + date.getDate()).slice(-2);
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+	const year = date.getFullYear();
+	return `${year}-${month}-${day}`;
+};
+
+const currentDate = fetchDate();
+
+const getDateLimit = (selectedDate, maxDays) => {
+	const result = new Date(selectedDate).setDate(
+		new Date(selectedDate).getDate() + maxDays
+	);
+	return fetchDate(result);
+};
 
 export const Book = forwardRef(function Book(props, ref) {
 	const [formValues, setFormValues] = useState(initialValues);
@@ -40,12 +51,22 @@ export const Book = forwardRef(function Book(props, ref) {
 			...formValues,
 			[name]: value,
 		});
+
+		setFormErrors({
+			...formErrors,
+			[name]: '',
+		});
+	};
+
+	const handleReset = () => {
+		setFormValues(initialValues);
+		setFormErrors(initialValues);
+		setIsSubmitting(false);
 	};
 
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmitting) {
 			window.open(buildBookingRequest(formValues), '_blank').focus();
-			setFormValues(initialValues);
 			setFormErrors(initialValues);
 			setIsSubmitting(false);
 		}
@@ -59,6 +80,18 @@ export const Book = forwardRef(function Book(props, ref) {
 					className="flex flex-col gap-6"
 					method="post"
 					onSubmit={handleSubmit}>
+					<div className="text-right">
+						<button
+							onClick={handleReset}
+							className="text-maroonPrimary rounded-[] disabled:text-dark-50"
+							disabled={
+								formValues === initialValues &&
+								formErrors === initialValues &&
+								!isSubmitting
+							}>
+							Reset
+						</button>
+					</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<FormInput
 							name="first_name"
@@ -68,6 +101,7 @@ export const Book = forwardRef(function Book(props, ref) {
 							error={formErrors.first_name}
 							onChange={handleChange}
 						/>
+
 						<FormInput
 							name="last_name"
 							label="Last Name"
@@ -81,7 +115,8 @@ export const Book = forwardRef(function Book(props, ref) {
 							name="id_passport"
 							label="ID/Passport No."
 							type="text"
-							value={formValues.id_passport}
+							className="uppercase"
+							value={formValues.id_passport.toUpperCase()}
 							error={formErrors.id_passport}
 							onChange={handleChange}
 						/>
@@ -99,25 +134,6 @@ export const Book = forwardRef(function Book(props, ref) {
 						/>
 
 						<FormInput
-							name="check_in_date"
-							label="Check In Date"
-							type="date"
-							min={currentDate}
-							value={formValues.check_in_date}
-							error={formErrors.check_in_date}
-							onChange={handleChange}
-						/>
-						<FormInput
-							name="check_out_date"
-							label="Check Out Date"
-							type="date"
-							min={formValues.check_in_date || currentDate}
-							value={formValues.check_out_date}
-							error={formErrors.check_out_date}
-							onChange={handleChange}
-						/>
-
-						<FormInput
 							name="room"
 							label="Select Room"
 							type="select"
@@ -131,19 +147,64 @@ export const Book = forwardRef(function Book(props, ref) {
 							onChange={handleChange}
 						/>
 						<FormInput
-							name="period_of_stay"
-							label="Select Period of Stay"
+							name="type_of_stay"
+							label="Select Type of Stay"
 							type="select"
 							options={[
-								{label: 'Short Stay', value: 'Short Stay'},
-								{label: 'Half Month', value: 'Half Month'},
-								{label: 'Full Month', value: 'Full Month'},
+								{label: 'Short Stay (1 - 10 days)', value: 'Short Stay'},
+								{label: 'Half Month (up to 14 days)', value: 'Half Month'},
+								{label: 'Full Month (1 month or more)', value: 'Full Month'},
 							]}
-							value={formValues.period_of_stay}
-							error={formErrors.period_of_stay}
+							value={formValues.type_of_stay}
+							error={formErrors.type_of_stay}
+							onChange={handleChange}
+						/>
+
+						<FormInput
+							name="check_in_date"
+							label="Check In Date"
+							type="date"
+							min={currentDate}
+							value={formValues.check_in_date}
+							error={formErrors.check_in_date}
+							onChange={handleChange}
+						/>
+
+						<FormInput
+							name="check_out_date"
+							label="Check Out Date"
+							type="date"
+							min={
+								formValues.type_of_stay
+									? (formValues.type_of_stay === 'Short Stay' &&
+											(formValues.check_in_date || currentDate)) ||
+									  (formValues.type_of_stay === 'Half Month' &&
+											getDateLimit(
+												formValues.check_in_date || currentDate,
+												11
+											)) ||
+									  (formValues.type_of_stay === 'Full Month' &&
+											getDateLimit(formValues.check_in_date || currentDate, 28))
+									: formValues.check_in_date || currentDate
+							}
+							max={
+								formValues.type_of_stay &&
+								((formValues.type_of_stay === 'Short Stay' &&
+									getDateLimit(formValues.check_in_date || currentDate, 10)) ||
+									(formValues.type_of_stay === 'Half Month' &&
+										getDateLimit(
+											formValues.check_in_date || currentDate,
+											14
+										)) ||
+									(formValues.type_of_stay === 'Full Month' &&
+										getDateLimit(formValues.check_in_date || currentDate, 31)))
+							}
+							value={formValues.check_out_date}
+							error={formErrors.check_out_date}
 							onChange={handleChange}
 						/>
 					</div>
+
 					<FormInput
 						name="mobile_no"
 						label="Mobile Number"
@@ -152,9 +213,10 @@ export const Book = forwardRef(function Book(props, ref) {
 						error={formErrors.mobile_no}
 						onChange={handleChange}
 					/>
+					
 					<FormInput
 						name="email"
-						label="Email Address"
+						label="Email Address (optional)"
 						type="email"
 						value={formValues.email}
 						error={formErrors.email}
@@ -169,9 +231,9 @@ export const Book = forwardRef(function Book(props, ref) {
 					<div className="text-base text-maroonSecondary font-medium text-center">
 						<p>Payments are made during check-in.</p>
 						<p>
-							Kindly take a moment to review {' '}
+							Kindly take a moment to review{' '}
 							<a href="/terms" className="underline">
-								Stayokay Hostel's Terms & Conditions
+								StayOkay Hostel's Terms & Conditions
 							</a>
 							.
 						</p>

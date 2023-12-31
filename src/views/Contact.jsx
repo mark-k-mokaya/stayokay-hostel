@@ -19,7 +19,8 @@ export const Contact = forwardRef(function Contact(props, ref) {
 				</p>
 				<div className="grid grid-cols-1 md:grid-cols-2 w-full gap-12">
 					<div className="border border-dark-25 overflow-hidden">
-						<iframe title='StayOkay Hostels Kisii on Google Maps'
+						<iframe
+							title="StayOkay Hostels Kisii on Google Maps"
 							src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1994.7700822279267!2d34.76460148732384!3d-0.6765621870954823!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182b3bfb8c88744b%3A0xcbc727c38c852323!2sStayokay%20Hostel!5e0!3m2!1sen!2ske!4v1697962080580!5m2!1sen!2ske"
 							className="border-0 w-full h-[400px] md:h-full"
 							allowFullScreen
@@ -33,7 +34,8 @@ export const Contact = forwardRef(function Contact(props, ref) {
 							<p>Mwanyegitinge Village, Nyanchwa, Kisii, 40200, Kenya</p>
 							<p>
 								Situated 1.4 km from Quickmart Supermarket Kisii. The nearest
-								airport is Kisumu International Airport, (111 km).
+								airports are Kisumu International Airport, (111 km) and
+								Lichota/Migori Airstrip, (60km).
 							</p>
 						</div>
 						<div className="gap-2.5 w-full break-words">
@@ -43,9 +45,9 @@ export const Contact = forwardRef(function Contact(props, ref) {
 						<div className="gap-2.5 w-full break-words">
 							<h6 className=" uppercase">CONTACT INFO</h6>
 							<p>
-								<strong>Phone:</strong> +254 722 394 133
+								<strong>Phone:</strong> +254 722 866 969
 							</p>
-							<p className='break-all'>
+							<p className="break-all">
 								<strong>Email:</strong> stayokayhostelkisii@gmail.com
 							</p>
 						</div>

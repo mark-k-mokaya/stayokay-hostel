@@ -5,7 +5,7 @@ export const About = forwardRef(function About(props, ref) {
 	return (
 		<section id="about" className="section-container" ref={ref}>
 			{/* Section Heading */}
-			<SectionHeading sub="WELCOME TO STAYOKAY" main="WE'RE JUST LIKE HOME" />
+			<SectionHeading sub="WELCOME TO STAYOKAY" main="JUST LIKE HOME" />
 
 			{/* Section Content */}
 			<div className="section-content">

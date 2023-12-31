@@ -97,6 +97,24 @@
 	button {
 		@apply font-body rounded-[3px] uppercase;
 	}
+
+	input[type='date'] {
+		@apply relative;
+	}
+
+	input[type='date']::-webkit-calendar-picker-indicator {
+		@apply w-full h-full bg-none text-transparent absolute inset-0 cursor-pointer;
+	}
+
+	input[value='']::-webkit-datetime-edit-text,
+	input[value='']::-webkit-datetime-edit-month-field,
+	input[value='']::-webkit-datetime-edit-day-field,
+	input[value='']::-webkit-datetime-edit-year-field {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		display: none;
+	}
 }
 
 @layer components {
@@ -199,5 +217,12 @@
 
 	#features .section-content div div {
 		@apply 2xl:w-[300px];
+	}
+}
+
+@media print {
+	nav#navbar,
+	footer#footer {
+		display: none;
 	}
 }

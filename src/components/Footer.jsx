@@ -1,6 +1,6 @@
 export const Footer = () => {
 	return (
-		<div className="pattern-divider h-[180px] relative flex items-center">
+		<footer className="pattern-divider h-[180px] relative flex items-center" id="footer">
 			<div className="absolute w-full h-full bg-maroonSecondary bg-opacity-[0.15]"></div>
 			<div className="z-10 p-5 md:p-3 min-h-[60px] w-full bg-maroonSecondary text-light text-opacity-90 flex flex-col items-center justify-center text-base text-center relative">
 				<p>
@@ -24,6 +24,6 @@ export const Footer = () => {
 					.
 				</p>
 			</div>
-		</div>
+		</footer>
 	);
 };

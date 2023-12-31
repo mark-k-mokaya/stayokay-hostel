@@ -38,7 +38,7 @@ export const Navbar = ({links}) => {
 	};
 
 	return (
-		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40">
+		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40" id='navbar'>
 			{/* Logo */}
 			<Link onClick={() => handleNavigate('/')} aria-label="Home">
 				<StayOkayLogo className="w-full h-full" />
