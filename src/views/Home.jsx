@@ -37,13 +37,13 @@ export const Home = () => {
 
 	return (
 		<main className="overflow-x-hidden">
-			<Hero />
+			 <Hero />
 			<About ref={sectionRefs.about} />
 			<Divider />
 			<Features ref={sectionRefs.features} />
 			<Divider />
 			<Rooms ref={sectionRefs.rooms} />
-			<Divider />
+			<Divider /> 
 			<Gallery ref={sectionRefs.gallery} />
 			<Divider />
 			<Reviews ref={sectionRefs.reviews} />

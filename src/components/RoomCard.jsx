@@ -13,6 +13,10 @@ export const RoomCard = ({
 }) => {
 	const {createImagesList} = useContext(RoomsContext);
 	const [imagesList, setImagesList] = useState([]);
+	const RoomImgWidth =
+		document.body.offsetWidth > 768
+			? document.body.offsetWidth / 2 - 176 + 14
+			: document.body.offsetWidth - 48 - 48;
 
 	useEffect(() => {
 		const images = createImagesList(roomType);
@@ -50,15 +54,12 @@ export const RoomCard = ({
 							loading="lazy"
 							src={roomImg.fallbackImageUrl}
 							alt={rest.roomLabel}
-							className="rounded-[3px] opacity-0 transition-opacity duration-200 ease-in-out"
+							className="w-full h-full rounded-[3px] opacity-0 transition-opacity duration-200 ease-in-out"
 							onLoad={(event) => {
 								event.target.classList.add('opacity-100');
 							}}
-							width={
-								document.body.offsetWidth > 768
-									? document.body.offsetWidth / 2 - 176 + 14
-									: document.body.offsetWidth - 48 - 48
-							}
+							width={RoomImgWidth}
+							height={RoomImgWidth}
 						/>
 					</picture>
 				</div>

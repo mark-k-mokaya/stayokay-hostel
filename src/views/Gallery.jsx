@@ -1,6 +1,6 @@
 import {useContext, useState, useEffect, forwardRef} from 'react';
 import {SectionHeading, Modal, GalleryModal} from '../components';
-import GalleryContext from '../context/gallery'
+import GalleryContext from '../context/gallery';
 
 export const Gallery = forwardRef(function Gallery(props, ref) {
 	const {gallery, createImagesList, setSelectedIndex} =
@@ -35,20 +35,23 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 							return (
 								<div
 									key={image.name}
-									className='bg-gray-100'>
+									className="bg-gray-100"
+									onClick={() => handleClick(index)}>
 									<picture className="cursor-pointer">
-										<source srcSet={image.imageUrl} type="image/webp" />
+										<source
+											src={image.thumbnail ? image.thumbnail.webp : ''}
+											type="image/webp"
+										/>
 										<img
-											className="opacity-0 transition-opacity duration-200 ease-in-out object-contain"
+											className="opacity-0 transition-opacity duration-200 ease-in-out h-full object-cover"
 											onLoad={(event) => {
 												event.target.classList.add('opacity-100');
 											}}
 											width={300}
 											height={300}
 											loading="lazy"
-											src={image.fallbackImageUrl}
+											src={image.thumbnail ? image.thumbnail.jpg : ''}
 											alt={altText}
-											onClick={() => handleClick(index)}
 										/>
 									</picture>
 								</div>

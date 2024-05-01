@@ -4,7 +4,6 @@ import rooms from '../data/rooms.json';
 
 const RoomsContext = createContext();
 const RoomsProvider = ({children}) => {
-	// fetch Images
 
 	const createImagesList = useCallback((roomType) => {
 		const images =

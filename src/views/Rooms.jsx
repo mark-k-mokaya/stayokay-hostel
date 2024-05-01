@@ -1,11 +1,11 @@
 import {useState, useContext, forwardRef} from 'react';
 import RoomsContext from '../context/rooms';
 import {SectionHeading, RoomCard, Modal} from '../components';
-import SharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.webp';
-import FallbackSharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.png';
-import DeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.webp';
-import FallbackDeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.png';
-import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.webp';
+import SharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.640.webp';
+import FallbackSharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.640.jpg';
+import DeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.640.webp';
+import FallbackDeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.640.jpg';
+import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
 import FallbackFamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
 
 export const Rooms = forwardRef(function Rooms(props, ref) {
@@ -38,13 +38,19 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<RoomCard
-						roomImg={{imageUrl: SharedRoomImg, fallbackImageUrl: FallbackSharedRoomImg}}
+						roomImg={{
+							imageUrl: SharedRoomImg,
+							fallbackImageUrl: FallbackSharedRoomImg,
+						}}
 						{...rooms.shared}
 						handleClick={handleClick}
 						setModal={setModal}
 					/>
 					<RoomCard
-						roomImg={{imageUrl: DeluxeRoomImg, fallbackImageUrl: FallbackDeluxeRoomImg}}
+						roomImg={{
+							imageUrl: DeluxeRoomImg,
+							fallbackImageUrl: FallbackDeluxeRoomImg,
+						}}
 						{...rooms.deluxe}
 						handleClick={handleClick}
 						setModal={setModal}

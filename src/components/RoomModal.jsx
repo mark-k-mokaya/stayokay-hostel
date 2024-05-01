@@ -7,6 +7,11 @@ import GuestsTagIcon from '../assets/img/icons/rooms-guests-icon.png';
 export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 	const navigate = useNavigate();
 	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
+	const [currentImage, setCurrentImage] = useState(imagesList[0]);
+	const roomImgWidth =
+		document.body.offsetWidth > 768
+			? document.body.offsetWidth / 2 - 176 + 14
+			: document.body.offsetWidth - 48 - 48;
 
 	const handleScroll = async () => {
 		await setCurrentPath(() => '/book');
@@ -15,49 +20,53 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 		handleClick();
 	};
 
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const currentImage = imagesList[currentIndex];
-
 	return (
 		<div className="flex flex-col md:flex-row gap-6 xl:gap-12">
 			{/* Images + Description */}
 			<div className="flex-1 space-y-1 mt-10 xl:mt-0">
-				<div id="main-preview" className="bg-gray-100">
-					<picture className="w-full flex-1">
-						<source srcSet={currentImage.imageUrl} type="image/webp" />
+				<div
+					id="main-preview"
+					className="flex justify-center items-center bg-gray-100 overflow-clip">
+					<picture>
+						<source srcSet={currentImage.webpSrcSet} type="image/webp" />
 						<img
-							className="opacity-0 transition-opacity duration-200 ease-in-out"
+							loading="lazy"
+							className="w-full h-fit opacity-0 transition-opacity duration-200 ease-in-out"
 							onLoad={(event) => {
 								event.target.classList.add('opacity-100');
 							}}
-							src={currentImage.fallbackImageUrl}
+							srcSet={currentImage.jpgSrcSet}
 							alt={currentImage.name.split('_')[1].split('-').join(' ')}
+							width={roomImgWidth}
+							height={roomImgWidth}
 						/>
 					</picture>
 				</div>
 
 				<div id="mini-gallery" className={`grid grid-cols-6 w-full gap-1`}>
-					{imagesList.map((image, index) => {
+					{imagesList.map((image) => {
 						const altText = image.name.split('_')[1].split('-').join(' ');
 						return (
 							<span
 								key={image.name}
 								className={
 									image === currentImage
-										? 'bg-gray-100 border-4 border-maroonPrimary h-fit w-fit flex'
-										: 'bg-gray-100 cursor-pointer h-fit'
+										? 'bg-gray-100 border-4 border-maroonPrimary'
+										: 'bg-gray-100 border-4 border-transparent cursor-pointer'
 								}>
 								<picture>
-									<source srcSet={image.imageUrl} type="image/webp" />
+									<source src={image.thumbnail ? image.thumbnail.webp : ''} type="image/webp" />
 									<img
-										className="w-full flex-1 opacity-0 transition-opacity duration-200 ease-in-out"
+										loading="lazy"
+										className="w-full h-fit flex-1 opacity-0 transition-opacity duration-200 ease-in-out"
 										onLoad={(event) => {
 											event.target.classList.add('opacity-100');
 										}}
-										loading="lazy"
-										src={image.fallbackImageUrl}
+										src={image.thumbnail ? image.thumbnail.jpg  : ''}
 										alt={altText}
-										onClick={() => setCurrentIndex(index)}
+										onClick={() => setCurrentImage(image)}
+										width='100'
+										height='100'
 									/>
 								</picture>
 							</span>
@@ -110,7 +119,6 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 					<h6 className="text-maroonSecondary uppercase">Key Features</h6>
 					<div className="border-t border-dark-10 p-6">
 						<ul className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-8">
-							{/* Add key prop */}
 							{rest.features.map((item) => (
 								<li className="list-disc" key={item + new Date().getTime()}>
 									{item}

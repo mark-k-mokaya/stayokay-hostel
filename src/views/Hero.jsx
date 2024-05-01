@@ -2,43 +2,13 @@ import {useEffect, useState, forwardRef, useContext, useRef} from 'react';
 import ScrollContext from '../context/scroll';
 import {Link, useNavigate} from 'react-router-dom';
 import {fetchImages} from '../utils/fetchImages';
-import supportsWebP from 'supports-webp' 
 
 export const Hero = forwardRef(function Hero(props, ref) {
 	const navigate = useNavigate();
 	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
 	const slides = document.getElementsByClassName('slide');
 	const [currentSlide, setCurrentSlide] = useState(0);
-	const [hasWebP, setHasWebP] = useState(false);
 	const slider = useRef();
-	const key = process.env.REACT_APP_PIX_BOOST_KEY;
-
-	const breakpoint = (size) => {
-		switch (true) {
-			case size <= 640:
-				return 640;
-			case size <= 768:
-				return 768;
-			case size <= 1024:
-				return 1024;
-			case size <= 1280:
-				return 1280;
-			case size <= 1536:
-				return 1536;
-			default:
-				return size;
-		}
-	};
-
-	useEffect(() => {
-		supportsWebP.then((supported) => {
-			if (supported) {
-				setHasWebP(true);
-			} else {
-				setHasWebP(false);
-			}
-		});
-	}, []);
 
 	const handleScroll = async () => {
 		await setCurrentPath(() => '/book');
@@ -108,13 +78,18 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								className={`slide z-4 bg-center xl:bg-left`}
 								style={{
 									display: index > 0 && 'hidden',
-									backgroundImage: `url(https://pixboost.com/api/2/img/https://stayokay-hostel-kisii.netlify.app/${
-										hasWebP ? image.imageUrl : image.fallbackImageUrl
-									}/resize?size=${breakpoint(
-										slider.current.offsetHeight
-									)}&auth=${key}
-)`,
 								}}>
+								<picture>
+									<source srcSet={image.webpSrcSet} type="image/webp" />
+									<img
+										className="w-full h-full object-cover opacity-0 transition-opacity duration-200 ease-in-out"
+										onLoad={(event) => {
+											event.target.classList.add('opacity-100');
+										}}
+										srcSet={image.jpgSrcSet}
+										alt={image.name.split('_')[1].split('-').join(' ')}
+									/>
+								</picture>
 								<div className="absolute inset-0 flex items-center pt-26 pb-10 bg-dark-10"></div>
 								<h3 className="slide-text bottom-0 text-center sm:text-right xl:bottom-[15%]">
 									{slideText}
