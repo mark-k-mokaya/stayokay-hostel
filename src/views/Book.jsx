@@ -116,7 +116,7 @@ export const Book = forwardRef(function Book(props, ref) {
 
 						<FormInput
 							name="id_passport"
-							label="ID/Passport No."
+							label="ID/Passport No. (optional)"
 							type="text"
 							className="uppercase"
 							value={formValues.id_passport.toUpperCase()}
