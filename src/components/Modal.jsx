@@ -7,13 +7,13 @@ import LeftChevronIcon from '../assets/img/left-chevron-icon.png';
 export const Modal = ({modal, modalType, handleClick}) => {
 	const {selectNext, selectPrev} = useContext(GalleryContext);
 	return (
-		<div className="fixed flex items-start md:items-start justify-center z-40 inset-0 w-screen h-screen overflow-y-auto bg-dark-50 self-center">
+		<div className="fixed flex items-start justify-center z-40 inset-0 w-screen h-screen overflow-y-auto bg-dark-50 self-center">
 			<div
 				id="menu-bg"
 				className="fixed inset-0 -z-10"
 				onClick={handleClick}></div>
 
-			<div className="relative my-12 flex flex-col items-start justify-start md:flex-row gap-6 xl:gap-12 w-[95%] xl:w-[80%] p-2 sm:p-12 bg-light z-[60]">
+			<div className="relative my-auto flex flex-col items-start justify-start md:flex-row gap-6 xl:gap-12 w-[95%] xl:w-[80%] p-2 sm:p-12 bg-light z-[60]">
 				<div
 					className="absolute top-2 right-2 sm:top-4 sm:right-4 p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 					onClick={handleClick}>

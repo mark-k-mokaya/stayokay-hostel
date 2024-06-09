@@ -77,13 +77,15 @@ export const Reviews = forwardRef(function Reviews(props, ref) {
 					<a
 						href="https://www.google.com/maps/place/Stayokay+Hostel/@-0.6766701,34.7631056,17z/data=!4m24!1m12!3m11!1s0x182b3bfb8c88744b:0xcbc727c38c852323!2sStayokay+Hostel!5m2!4m1!1i2!8m2!3d-0.6766701!4d34.7656805!9m1!1b1!16s%2Fg%2F11c5bz4yyl!3m10!1s0x182b3bfb8c88744b:0xcbc727c38c852323!5m2!4m1!1i2!8m2!3d-0.6766701!4d34.7656805!9m1!1b1!16s%2Fg%2F11c5bz4yyl?entry=ttu"
 						target="_blank"
-						className="review-card flex flex-row items-center justify-center text-center uppercase w-full py-3 font-black text-2xl bg-light text-maroonPrimary hover:underline hover:underline-offset-[6px]"
+						className="review-card flex flex-row items-center justify-center text-center uppercase w-full font-black text-2xl bg-light text-maroonPrimary hover:underline hover:underline-offset-[6px]"
 						rel="noreferrer">
 						<span>
 							Read More
 							<FontAwesomeIcon
 								icon={faLink}
-								className="text-maroonPrimary rounded inline ml-2"
+								className={
+									'text-maroonPrimary rounded text-center w-full lg:w-fit inline lg:inline mt-2 lg:mt-0 lg:ml-2'
+								}
 							/>
 						</span>
 					</a>
