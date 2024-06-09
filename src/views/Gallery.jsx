@@ -49,6 +49,7 @@ export const Gallery = forwardRef(function Gallery(props, ref) {
 											className="opacity-0 transition-opacity duration-200 ease-in-out w-full h-full object-cover"
 											onLoad={(event) => {
 												event.target.classList.add('opacity-100');
+												handleClick();
 											}}
 											width={300}
 											height={300}
