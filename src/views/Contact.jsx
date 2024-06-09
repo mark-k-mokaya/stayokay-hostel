@@ -3,7 +3,7 @@ import {SectionHeading} from '../components';
 
 export const Contact = forwardRef(function Contact(props, ref) {
 	return (
-		<section id="contact" className="section-container" ref={ref}>
+		<section id="contact" className={`relative section-container ${props.className}`} ref={ref}>
 			<SectionHeading sub="KEEP IN TOUCH" main="CONTACT US" />
 
 			<div className="section-content">

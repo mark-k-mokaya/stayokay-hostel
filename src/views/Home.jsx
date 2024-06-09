@@ -8,28 +8,12 @@ import {
 	Book,
 	Contact,
 } from '../views';
-import {useContext, useEffect, useCallback} from 'react';
+import {useContext, useEffect} from 'react';
 import ScrollContext from '../context/scroll';
 import {Divider, Footer} from '../components';
 
 export const Home = () => {
-	const {sectionRefs, currentPath, setCurrentPath, scrollTo} =
-		useContext(ScrollContext);
-
-	const updatePath = useCallback(() => {
-		setCurrentPath(() => window.location.pathname);
-	}, [setCurrentPath]);
-
-	useEffect(() => {
-		const handler = () => {
-			updatePath();
-		};
-		window.addEventListener('popstate', handler);
-
-		return () => {
-			window.removeEventListener('popstate', handler);
-		};
-	}, [updatePath]);
+	const {sectionRefs, currentPath, scrollTo} = useContext(ScrollContext);
 
 	useEffect(() => {
 		scrollTo(currentPath);
@@ -37,20 +21,26 @@ export const Home = () => {
 
 	return (
 		<main className="overflow-x-hidden">
-			 <Hero />
-			<About ref={sectionRefs.about} />
+			<Hero className="overflow-hidden" />
+			<About ref={sectionRefs.about} className="overflow-hidden" />
 			<Divider />
-			<Features ref={sectionRefs.features} />
+			<Features
+				ref={sectionRefs.features}
+				className="overflow-hidden"
+			/>
 			<Divider />
-			<Rooms ref={sectionRefs.rooms} />
-			<Divider /> 
-			<Gallery ref={sectionRefs.gallery} />
+			<Rooms ref={sectionRefs.rooms} className="overflow-hidden" />
 			<Divider />
-			<Reviews ref={sectionRefs.reviews} />
+			<Gallery
+				ref={sectionRefs.gallery}
+				className="overflow-hidden"
+			/>
 			<Divider />
-			<Book ref={sectionRefs.book} />
+			<Reviews ref={sectionRefs.reviews} className="" />
 			<Divider />
-			<Contact ref={sectionRefs.contact} />
+			<Book ref={sectionRefs.book} className="" />
+			<Divider />
+			<Contact ref={sectionRefs.contact} className="" />
 			<Footer />
 		</main>
 	);

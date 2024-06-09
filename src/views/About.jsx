@@ -3,7 +3,7 @@ import {SectionHeading} from '../components';
 
 export const About = forwardRef(function About(props, ref) {
 	return (
-		<section id="about" className="section-container" ref={ref}>
+		<section id="about" className={`relative section-container ${props.className}`} ref={ref}>
 			{/* Section Heading */}
 			<SectionHeading sub="WELCOME TO STAYOKAY" main="JUST LIKE HOME" />
 

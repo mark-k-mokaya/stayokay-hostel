@@ -13,10 +13,6 @@ export const RoomCard = ({
 }) => {
 	const {createImagesList} = useContext(RoomsContext);
 	const [imagesList, setImagesList] = useState([]);
-	const RoomImgWidth =
-		document.body.offsetWidth > 768
-			? document.body.offsetWidth / 2 - 176 + 14
-			: document.body.offsetWidth - 48 - 48;
 
 	useEffect(() => {
 		const images = createImagesList(roomType);
@@ -35,9 +31,9 @@ export const RoomCard = ({
 		handleClick();
 	};
 	return (
-		<div className="flex flex-col gap-3.5 justify-between">
+		<div className="flex flex-col gap-3.5 justify-between cursor-pointer" onClick={handleModal}>
 			<div className="flex flex-col gap-3.5">
-				<div className="relative bg-gray-100">
+				<div className="relative bg-gray-100 rounded-[3px]">
 					<div className="absolute flex flex-wrap justify-end gap-1.5 bottom-2 md:bottom-4 mb-1 md:mb-2 px-1 md:px-2 z-10 w-full">
 						<div className="h-8 md:h-10 bg-light border border-dark-10 p-1 md:p-2 flex gap-1 sm:gap-2 items-center justify-center rounded-[3px] font-semibold text-maroonPrimary text-[12px] sm:text-base whitespace-nowrap">
 							<img src={PriceTagIcon} alt="" className="h-4 md:h-full" />
@@ -52,14 +48,14 @@ export const RoomCard = ({
 						<source srcSet={roomImg.imageUrl} type="image/webp" />
 						<img
 							loading="lazy"
-							src={roomImg.fallbackImageUrl}
+							srcSet={roomImg.fallbackImageUrl}
 							alt={rest.roomLabel}
-							className="w-full h-full rounded-[3px] opacity-0 transition-opacity duration-200 ease-in-out"
+							className="w-full h-full object-cover rounded-[3px] opacity-0 transition-opacity duration-200 ease-in-out"
 							onLoad={(event) => {
 								event.target.classList.add('opacity-100');
 							}}
-							width={RoomImgWidth}
-							height={RoomImgWidth}
+							width={540}
+							height={430}
 						/>
 					</picture>
 				</div>
@@ -69,7 +65,7 @@ export const RoomCard = ({
 				</h5>
 				<p className="text-base">{rest.description}</p>
 			</div>
-			<button className="room-card-btn" onClick={handleModal}>
+			<button className="room-card-btn">
 				SHOW DETAILS
 			</button>
 		</div>

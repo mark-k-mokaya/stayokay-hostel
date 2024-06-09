@@ -18,6 +18,7 @@ export const Navbar = ({links}) => {
 	const handleNavigate = async (path) => {
 		const foundLink = links.find((link) => link.path === path);
 		const foundCurrentLink = links.find((link) => link.path === currentPath);
+
 		if (
 			(foundCurrentLink || currentPath === '/') &&
 			(foundLink || path === '/') &&
@@ -38,10 +39,12 @@ export const Navbar = ({links}) => {
 	};
 
 	return (
-		<nav className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40" id='navbar'>
+		<nav
+			className="flex fixed justify-between w-full h-26 pr-2 bg-light shadow-md sm:px-8 lg:px-15 z-40"
+			id="navbar">
 			{/* Logo */}
 			<Link onClick={() => handleNavigate('/')} aria-label="Home">
-				<StayOkayLogo className="w-full h-full" />
+				<StayOkayLogo className="w-full h-full select-none" />
 			</Link>
 
 			{/* Links */}

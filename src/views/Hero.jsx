@@ -39,7 +39,10 @@ export const Hero = forwardRef(function Hero(props, ref) {
 	}, [currentSlide, slides]);
 
 	return (
-		<section id="Hero" className="p-0 h-screen xl:h-[110vh] relative" ref={ref}>
+		<section
+			id="Hero"
+			className={`p-0 h-screen xl:h-[110vh] relative ${props.className}`}
+			ref={ref}>
 			<div className="flex flex-col xl:flex-row h-full bg-pattern bg-maroonSecondary">
 				{/* Hero Content Section */}
 				<div className="absolute xl:relative flex items-center justify-center w-full xl:w-[640px] 2xl:w-5/12 h-[100%] xl:h-full z-10 xl:z-0 ">
@@ -82,7 +85,7 @@ export const Hero = forwardRef(function Hero(props, ref) {
 								<picture>
 									<source srcSet={image.webpSrcSet} type="image/webp" />
 									<img
-										className="w-full h-full object-cover opacity-0 transition-opacity duration-200 ease-in-out"
+										className="w-full h-full object-cover opacity-0 transition-opacity duration-200 ease-in-out select-none"
 										onLoad={(event) => {
 											event.target.classList.add('opacity-100');
 										}}
