@@ -73,7 +73,10 @@ export const Book = forwardRef(function Book(props, ref) {
 	}, [formErrors, formValues, isSubmitting]);
 
 	return (
-		<section id="book" className="section-container" ref={ref}>
+		<section
+			id="book"
+			className={`relative section-container ${props.className}`}
+			ref={ref}>
 			<SectionHeading sub="BOOK YOUR ROOM WITH CONFIDENCE" main="BOOK NOW" />
 			<div className="section-content w-full xl:px-16">
 				<form
@@ -113,7 +116,7 @@ export const Book = forwardRef(function Book(props, ref) {
 
 						<FormInput
 							name="id_passport"
-							label="ID/Passport No."
+							label="ID/Passport No. (optional)"
 							type="text"
 							className="uppercase"
 							value={formValues.id_passport.toUpperCase()}
@@ -141,6 +144,7 @@ export const Book = forwardRef(function Book(props, ref) {
 								{label: 'Shared Room', value: 'Shared Room'},
 								{label: 'Deluxe Room', value: 'Deluxe Room'},
 								{label: 'Family Room', value: 'Family Room'},
+								{label: 'Student Room', value: 'Student Room'},
 							]}
 							value={formValues.room}
 							error={formErrors.room}
@@ -213,7 +217,7 @@ export const Book = forwardRef(function Book(props, ref) {
 						error={formErrors.mobile_no}
 						onChange={handleChange}
 					/>
-					
+
 					<FormInput
 						name="email"
 						label="Email Address (optional)"

@@ -43,6 +43,7 @@ export const Modal = ({modal, modalType, handleClick}) => {
 						onClick={selectPrev}>
 						<img src={LeftChevronIcon} width={50} alt="Previous" />
 					</div>
+
 					<div
 						className="p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
 						onClick={selectNext}>

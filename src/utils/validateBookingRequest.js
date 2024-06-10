@@ -15,9 +15,7 @@ export const validateBookingRequest = (values) => {
 	}
 
 	// ID/Passport
-	if (!values.id_passport) {
-		errors.id_passport = 'Cannot be blank';
-	} else if (!/^[A-Z0-9]{8,9}$|^\d{6,8}$/im.test(values.id_passport)) {
+	if (values.id_passport && !/^[A-Z0-9]{8,9}$|^\d{6,8}$/im.test(values.id_passport)) {
 		errors.id_passport = 'Invalid ID/Passport Number';
 	}
 

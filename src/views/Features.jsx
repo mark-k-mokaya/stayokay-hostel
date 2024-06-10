@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import {forwardRef} from 'react';
 import {SectionHeading, Feature} from '../components';
 import WifiIcon from '../assets/img/icons/features-icon-wifi.png';
 import BedIcon from '../assets/img/icons/features-icon-bed.png';
@@ -11,9 +11,12 @@ import CoffeeIcon from '../assets/img/icons/features-icon-coffee.png';
 import KitchenIcon from '../assets/img/icons/features-icon-kitchen.png';
 import StorageIcon from '../assets/img/icons/features-icon-storage.png';
 
-export const Features = forwardRef(function Features(props, ref)  {
+export const Features = forwardRef(function Features(props, ref) {
 	return (
-		<section id="features" className="section-container pt-32" ref={ref}>
+		<section
+			id="features"
+			className={`section-container pt-32 ${props.className}`}
+			ref={ref}>
 			{/* Section Heading */}
 			<SectionHeading sub="WHY CHOOSE US?" main="WHAT TO EXPECT" />
 

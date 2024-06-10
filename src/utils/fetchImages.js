@@ -4,7 +4,9 @@ export const fetchImages = (images) => {
 		const img = image.split(/[./]/).filter((el) => el);
 		if (img.length < 3) {
 			const [name, type] = img;
-			if (type !== 'webp') {
+			if (type === 'mp4') {
+				imageList.push({name, videoUrl: images(image)});
+			} else if (type !== 'webp') {
 				imageList.push({name, fallbackImageUrl: images(image)});
 			} else if (type === 'webp') {
 				imageList[imageList.length - 1].imageUrl = images(image);
@@ -54,6 +56,5 @@ export const fetchImages = (images) => {
 			}
 		}
 	});
-	console.log(imageList);
 	return imageList;
 };

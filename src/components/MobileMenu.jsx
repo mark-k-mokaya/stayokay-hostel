@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import CloseIcon from '../assets/img/close-icon.png';
 
 const MobileMenu = ({hideMenu, links, handleNavigate}) => {
 	const onNavigate = (path) => {
@@ -18,6 +19,11 @@ const MobileMenu = ({hideMenu, links, handleNavigate}) => {
 
 			{/* Menu */}
 			<div className="py-32 absolute right-0 top-0 z-60 h-full w-full md:w-[500px] bg-white">
+				<div
+					className="absolute top-2 right-2 sm:top-4 sm:right-4 p-2 bg-light text-maroonPrimary border border-dark-25 cursor-pointer"
+					onClick={hideMenu}>
+					<img src={CloseIcon} width={32} alt="Close" />
+				</div>
 				<div
 					id="navlinks"
 					className="flex flex-col items-center text-xl space-y-8 leading-4 font-semibold text-maroonSecondary">

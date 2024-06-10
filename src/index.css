@@ -52,13 +52,16 @@
 }
 
 @layer base {
+	body {
+		overflow-anchor: none;
+	}
 	html {
 		@apply scroll-smooth font-body text-dark-75 leading-6 text-base;
 	}
 
 	/* Containers */
 	section {
-		@apply py-32 px-12 xl:py-40 xl:px-44;
+		@apply py-32 px-12 xl:py-40 xl:px-44 snap-start;
 	}
 
 	/* Typography */
@@ -176,7 +179,7 @@
 	}
 
 	ol.main-list {
-		@apply flex flex-col gap-12 divide-y-2 border-t-2;
+		@apply flex flex-col gap-12 divide-y border-t;
 	}
 
 	li.main-list-item {

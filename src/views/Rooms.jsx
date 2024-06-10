@@ -1,12 +1,15 @@
 import {useState, useContext, forwardRef} from 'react';
 import RoomsContext from '../context/rooms';
 import {SectionHeading, RoomCard, Modal} from '../components';
+
 import SharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.640.webp';
 import FallbackSharedRoomImg from '../assets/img/rooms/shared/01_rooms-shared-room.640.jpg';
 import DeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.640.webp';
 import FallbackDeluxeRoomImg from '../assets/img/rooms/deluxe/01_rooms-deluxe-room.640.jpg';
-import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
-import FallbackFamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.png';
+import FamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.640.webp';
+import FallbackFamilyRoomImg from '../assets/img/rooms/family/01_rooms-family-room.640.png';
+import StudentRoomImg from '../assets/img/rooms/student/01_rooms-student-room.640.webp';
+import FallbackStudentRoomImg from '../assets/img/rooms/student/01_rooms-student-room.640.jpg';
 
 export const Rooms = forwardRef(function Rooms(props, ref) {
 	const {rooms} = useContext(RoomsContext);
@@ -15,8 +18,12 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 	const handleClick = () => {
 		setShowModal((showModal) => !showModal);
 	};
+
 	return (
-		<section id="rooms" className="relative section-container" ref={ref}>
+		<section
+			id="rooms"
+			className={`relative section-container ${props.className}`}
+			ref={ref}>
 			{showModal && (
 				<Modal modal={modal} modalType="room" handleClick={handleClick} />
 			)}
@@ -39,6 +46,15 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<RoomCard
 						roomImg={{
+							imageUrl: StudentRoomImg,
+							fallbackImageUrl: FallbackStudentRoomImg,
+						}}
+						{...rooms.student}
+						handleClick={handleClick}
+						setModal={setModal}
+					/>
+					<RoomCard
+						roomImg={{
 							imageUrl: SharedRoomImg,
 							fallbackImageUrl: FallbackSharedRoomImg,
 						}}
@@ -46,6 +62,7 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 						handleClick={handleClick}
 						setModal={setModal}
 					/>
+
 					<RoomCard
 						roomImg={{
 							imageUrl: DeluxeRoomImg,
@@ -56,7 +73,10 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 						setModal={setModal}
 					/>
 					<RoomCard
-						roomImg={{imageUrl: FamilyRoomImg, fallbackImageUrl: FallbackFamilyRoomImg}}
+						roomImg={{
+							imageUrl: FamilyRoomImg,
+							fallbackImageUrl: FallbackFamilyRoomImg,
+						}}
 						{...rooms.family}
 						handleClick={handleClick}
 						setModal={setModal}

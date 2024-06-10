@@ -1,9 +1,12 @@
-import {useContext} from 'react';
+import {useContext, useRef} from 'react';
 import GalleryContext from '../context/gallery';
+import {LoadingSpinner} from './LoadingSpinner';
 
 export const GalleryModal = () => {
-	const {gallery, selectedIndex, setSelectedIndex} = useContext(GalleryContext);
+	const {gallery, selectedIndex, setSelectedIndex, isLoading, setIsLoading} =
+		useContext(GalleryContext);
 	const currentImage = gallery[selectedIndex];
+	const mainImageRef = useRef();
 
 	return (
 		<>
@@ -12,16 +15,20 @@ export const GalleryModal = () => {
 				<div className="flex flex-col self-center flex-1 items-center justify-center space-y-1">
 					<div
 						id="main-preview"
-						className="w-full flex justify-center items-center mt-14 md:mt-6 overflow-clip">
-						<picture className="rounded-[3px] w-full md:w-[80%] lg:w-[60%]">
+						className="flex items-center justify-center w-fit mt-14 md:mt-6">
+						{isLoading ? <LoadingSpinner /> : null}
+						<picture className="rounded-[3px]">
 							<source
 								srcSet={currentImage.webpSrcSet.split(',')[0]}
 								type="image/webp"
 							/>
+
 							<img
-								className="opacity-0 transition-opacity duration-200 ease-in-out"
+								ref={mainImageRef}
+								className="w-full md:w-[80%] lg:w-[60%] mx-auto opacity-0 transition-opacity duration-200 ease-in-out object-cover"
 								onLoad={(event) => {
 									event.target.classList.add('opacity-100');
+									setIsLoading(false);
 								}}
 								loading="lazy"
 								srcSet={currentImage.jpgSrcSet.split(',')[0]}
@@ -44,10 +51,17 @@ export const GalleryModal = () => {
 											? 'block w-20 h-[75px] bg-gray-100 m-auto border-4 border-maroonPrimary'
 											: 'block w-20 h-[75px] bg-gray-100 m-auto cursor-pointer'
 									}
-									onClick={() => setSelectedIndex(index)}>
+									onClick={
+										image !== currentImage
+											? () => {
+													setIsLoading(true);
+													setSelectedIndex(index);
+											  }
+											: () => false
+									}>
 									<picture>
 										<source
-											src={image.thumbnail ? image.thumbnail.webp : ''}
+											srcSet={image.thumbnail ? image.thumbnail.webp : ''}
 											type="image/webp"
 										/>
 										<img
@@ -58,7 +72,7 @@ export const GalleryModal = () => {
 											loading="lazy"
 											width="80"
 											height="75"
-											src={image.thumbnail ? image.thumbnail.jpg : ''}
+											srcSet={image.thumbnail ? image.thumbnail.jpg : ''}
 											alt={altText}
 										/>
 									</picture>

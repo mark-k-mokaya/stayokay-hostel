@@ -6,24 +6,25 @@
 		"priceTagLabel": "from Ksh. 1,000 each",
 		"amount": {
 			"short_stay": 1000,
-			"half_month": 5500,
-			"full_month": 8500
+			"half_month": 6000,
+			"full_month": 9000
 		},
 		"rate_conditions": {
 			"short_stay": "Price per person",
-			"half_month": "",
-			"full_month": ""
+			"half_month": "Price per person",
+			"full_month": "Price per person"
 		},
 		"features": [
-			"2 x Single beds",
-			"Hot showers",
-			"2 x Reading desks",
+			"Self-contained room",
+			"2 x Double Beds",
+			"Hot shower",
+			"Reading desks",
 			"Toiletries",
 			"Wardrobe",
 			"Room cleaning",
 			"Tea & coffee for short stay"
 		],
-		"description": "Make new friends in our cozy shared room, with comfortable single beds and storage lockers for your belongings."
+		"description": "Make new friends in our cozy shared room, with comfortable double beds and storage lockers for your belongings."
 	},
 
 	"family": {
@@ -33,8 +34,8 @@
 		"priceTagLabel": "from Ksh. 3,500",
 		"amount": {
 			"short_stay": 3500,
-			"half_month": 12000,
-			"full_month": 20000
+			"half_month": 15000,
+			"full_month": 22000
 		},
 		"rate_conditions": {
 			"short_stay": "",
@@ -42,12 +43,13 @@
 			"full_month": ""
 		},
 		"features": [
-			"1 x King Size Bed",
-			"1 x Double Decker Bed",
-			"Hot Showers",
+			"Self-contained room",
+			"King Size Bed",
+			"Bunk Bed",
+			"Hot Shower",
 			"TV",
-			"1 x Sofa Set",
-			"1 x Fridge",
+			"Sofa Set",
+			"Fridge",
 			"Wardrobe",
 			"Room cleaning",
 			"Tea & Coffee for short stay",
@@ -63,8 +65,8 @@
 		"priceTagLabel": "from Ksh. 2,500",
 		"amount": {
 			"short_stay": 2500,
-			"half_month": 10000,
-			"full_month": 18500
+			"half_month": 12000,
+			"full_month": 20000
 		},
 		"rate_conditions": {
 			"short_stay": "",
@@ -72,17 +74,45 @@
 			"full_month": ""
 		},
 		"features": [
-			"2 x Queen size beds",
-			"1 x Arm Chair",
-			"Hot showers",
+			"Self-contained room",
+			"Queen size bed",
+			"Arm Chair",
+			"Hot shower",
 			"TV",
-			"2 x Reading desks",
-			"1 x Fridge",
+			"Reading desks",
+			"Fridge",
 			"Wardrobe",
 			"Room cleaning",
 			"Tea & Coffee for short stay",
 			"Toiletries"
 		],
 		"description": "Treat yourself to a luxurious stay in our deluxe room, featuring premium amenities, queen-size beds and so much more."
+	},
+	"student": {
+		"roomType": "student",
+		"roomLabel": "Intern Room",
+		"guestsTagLabel": "6 guests",
+		"priceTagLabel": "from Ksh. 500",
+		"amount": {
+			"short_stay": 500,
+			"half_month": 3000,
+			"full_month": 5500
+		},
+		"rate_conditions": {
+			"short_stay": "Price per person",
+			"half_month": "Price per person",
+			"full_month": "Price per person"
+		},
+		"features": [
+			"Self-contained room",
+			"Bunk beds",
+			"Hot shower",
+			"Reading desks",
+			"Wardrobes",
+			"Room cleaning",
+			"Tea & Coffee for short stay",
+			"Toiletries"
+		],
+		"description": "Our Intern room offers a comfortable and affordable space with bunk beds, study desks, free Wi-Fi, and ample storage, perfect for academic pursuits and relaxation."
 	}
 }
