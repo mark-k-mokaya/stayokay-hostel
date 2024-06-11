@@ -36,11 +36,11 @@ export const Rooms = forwardRef(function Rooms(props, ref) {
 			{/* Section Content */}
 			<div className="section-content">
 				<p>
-					We offer a range of rooms to suit your needs and budget - shared
-					rooms, deluxe rooms and family rooms. All our rooms are equipped with
-					comfortable beds, fresh linens, and en-suite bathrooms. Our rates are
-					affordable and include all the amenities you need to make your stay
-					comfortable.
+					We offer a wide range of rooms to suit your needs and budget - intern
+					rooms, shared rooms, deluxe rooms and family rooms. All our rooms are
+					equipped with comfortable beds, fresh linens, and en-suite bathrooms.
+					Our rates are affordable and include all the amenities you need to
+					make your stay comfortable.
 				</p>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
