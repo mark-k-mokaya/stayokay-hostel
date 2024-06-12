@@ -141,10 +141,10 @@ export const Book = forwardRef(function Book(props, ref) {
 							label="Select Room"
 							type="select"
 							options={[
+								{label: 'Intern Room', value: 'Intern Room'},
 								{label: 'Shared Room', value: 'Shared Room'},
 								{label: 'Deluxe Room', value: 'Deluxe Room'},
 								{label: 'Family Room', value: 'Family Room'},
-								{label: 'Student Room', value: 'Student Room'},
 							]}
 							value={formValues.room}
 							error={formErrors.room}
