@@ -26,7 +26,6 @@
 		],
 		"description": "Make new friends in our cozy shared room, with comfortable double beds and storage lockers for your belongings."
 	},
-
 	"family": {
 		"roomType": "family",
 		"roomLabel": "Family Room",
@@ -35,7 +34,7 @@
 		"amount": {
 			"short_stay": 3500,
 			"half_month": 15000,
-			"full_month": 22000
+			"full_month": 24000
 		},
 		"rate_conditions": {
 			"short_stay": "",
@@ -57,7 +56,6 @@
 		],
 		"description": "Enjoy quality time with your loved ones in our spacious family room, featuring comfortable beds, ample storage, and plenty of room for everyone to relax and unwind."
 	},
-
 	"deluxe": {
 		"roomType": "deluxe",
 		"roomLabel": "Deluxe Room",
