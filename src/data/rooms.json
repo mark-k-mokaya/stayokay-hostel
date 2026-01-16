@@ -90,7 +90,7 @@
 		"roomType": "student",
 		"roomLabel": "Intern Room",
 		"guestsTagLabel": "6 guests",
-		"priceTagLabel": "from Ksh. 500",
+		"priceTagLabel": "from Ksh. 500 each",
 		"amount": {
 			"short_stay": 500,
 			"half_month": 3000,

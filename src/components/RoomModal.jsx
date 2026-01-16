@@ -1,5 +1,6 @@
 import {useContext, useState} from 'react';
 import ScrollContext from '../context/scroll';
+import RoomsContext from '../context/rooms';
 import {Link, useNavigate} from 'react-router-dom';
 import PriceTagIcon from '../assets/img/icons/rooms-price-tag-icon.png';
 import GuestsTagIcon from '../assets/img/icons/rooms-guests-icon.png';
@@ -10,6 +11,7 @@ import {faPlay} from '@fortawesome/free-solid-svg-icons';
 export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 	const navigate = useNavigate();
 	const {setCurrentPath, scrollTo} = useContext(ScrollContext);
+	const {isUpdatedDataFetched} = useContext(RoomsContext);
 	const [currentImage, setCurrentImage] = useState(imagesList[0]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -233,6 +235,11 @@ export const RoomModal = ({roomType, imagesList, handleClick, ...rest}) => {
 								</span>
 							</p>
 						</div>
+						{!isUpdatedDataFetched && (
+							<div className="py-2 text-right">
+								<p>Note: Current prices may not be up to date!</p>
+							</div>
+						)}
 					</div>
 				</div>
 				<div>
