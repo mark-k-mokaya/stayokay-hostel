@@ -1,10 +1,5 @@
-import dotenv from 'dotenv';
-import {GoogleSpreadsheet} from 'google-spreadsheet';
-import {JWT} from 'google-auth-library';
-
-// require('dotenv').config();
-// const GoogleSpreadsheet = require('google-spreadsheet').GoogleSpreadsheet;
-// const JWT = require('google-auth-library').JWT;
+const GoogleSpreadsheet = require('google-spreadsheet').GoogleSpreadsheet;
+const JWT = require('google-auth-library').JWT;
 
 const serviceAccountAuth = new JWT({
 	email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -12,7 +7,7 @@ const serviceAccountAuth = new JWT({
 	scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-export const handler = async () => {
+module.exports.handler = async () => {
 	try {
 		const doc = new GoogleSpreadsheet(
 			process.env.GOOGLE_SPREADSHEET_ID,
