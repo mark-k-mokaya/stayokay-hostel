@@ -1,5 +1,5 @@
-const GoogleSpreadsheet = require('google-spreadsheet').GoogleSpreadsheet;
-const JWT = require('google-auth-library').JWT;
+import {GoogleSpreadsheet} from 'google-spreadsheet';
+import {JWT} from 'google-auth-library';
 
 const serviceAccountAuth = new JWT({
 	email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -7,7 +7,7 @@ const serviceAccountAuth = new JWT({
 	scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-module.exports.handler = async () => {
+export const handler = async () => {
 	try {
 		const doc = new GoogleSpreadsheet(
 			process.env.GOOGLE_SPREADSHEET_ID,
