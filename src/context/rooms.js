@@ -34,7 +34,7 @@ const RoomsProvider = ({children}) => {
 
 	useEffect(
 		() => async () => {
-			await fetch('/.netlify/functions/fetch-room-details')
+			await fetch('/api/fetch-room-details')
 				.then((res) => res.json())
 				.then((data) => {
 					const csv = Papa.unparse(data);

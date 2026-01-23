@@ -16,7 +16,7 @@ export const handler = async () => {
 	try {
 		const doc = new GoogleSpreadsheet(
 			process.env.GOOGLE_SPREADSHEET_ID,
-			serviceAccountAuth
+			serviceAccountAuth,
 		);
 
 		await doc.loadInfo(); // Load sheet info
