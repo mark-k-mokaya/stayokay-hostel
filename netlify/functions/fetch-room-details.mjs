@@ -1,6 +1,5 @@
-require('dotenv').config();
-const GoogleSpreadsheet = require('google-spreadsheet').GoogleSpreadsheet;
-const JWT = require('google-auth-library').JWT;
+import {GoogleSpreadsheet} from 'google-spreadsheet';
+import {JWT} from 'google-auth-library';
 
 const serviceAccountAuth = new JWT({
 	email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -8,7 +7,7 @@ const serviceAccountAuth = new JWT({
 	scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-exports.handler = async () => {
+export default async (req, context) => {
 	try {
 		const doc = new GoogleSpreadsheet(
 			process.env.GOOGLE_SPREADSHEET_ID,
@@ -18,16 +17,9 @@ exports.handler = async () => {
 		await doc.loadInfo(); // Load sheet info
 		const sheet = doc.sheetsByTitle['Room Details'];
 		const rows = await sheet.getCellsInRange('A1:L5');
-		return {
-			statusCode: 200,
-			body: JSON.stringify(rows),
-		};
+		return new Response(JSON.stringify(rows));
 	} catch (error) {
-		// throw new Error(error);
 		console.log(error);
-		return {
-			statusCode: 400,
-			body: JSON.stringify({error}),
-		};
+		return new Response(JSON.stringify({error}), {status: 400});
 	}
 };
