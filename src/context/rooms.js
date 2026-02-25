@@ -32,31 +32,28 @@ const RoomsProvider = ({children}) => {
 
 	let [isUpdatedDataFetched, setIsUpdatedDataFetched] = useState(false);
 
-	useEffect(
-		() => async () => {
-			await fetch('/api/fetch-room-details')
-				.then((res) => res.json())
-				.then((data) => {
-					const csv = Papa.unparse(data);
-					Papa.parse(csv, {
-						header: true,
-						delimiter: ',',
-						complete: function (result) {
-							let rooms = result.data
-								.map((row) => new RoomDetails(row))
-								.reduce((acc, room) => {
-									acc[room.roomType] = room;
-									return acc;
-								}, {});
-							setRoomData(rooms);
-							setIsUpdatedDataFetched(true);
-						},
-					});
-				})
-				.catch((e) => {});
-		},
-		[],
-	);
+	useEffect(() => {
+		fetch('/api/fetch-room-details')
+			.then((res) => res.json())
+			.then((data) => {
+				const csv = Papa.unparse(data);
+				Papa.parse(csv, {
+					header: true,
+					delimiter: ',',
+					complete: function (result) {
+						let rooms = result.data
+							.map((row) => new RoomDetails(row))
+							.reduce((acc, room) => {
+								acc[room.roomType] = room;
+								return acc;
+							}, {});
+						setRoomData(rooms);
+						setIsUpdatedDataFetched(true);
+					},
+				});
+			})
+			.catch((e) => {});
+	}, []);
 
 	return (
 		<RoomsContext.Provider

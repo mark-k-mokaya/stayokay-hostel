@@ -1,5 +1,5 @@
-import {GoogleSpreadsheet} from 'google-spreadsheet';
-import {JWT} from 'google-auth-library';
+const GoogleSpreadsheet = require('google-spreadsheet').GoogleSpreadsheet;
+const JWT = require('google-auth-library').JWT;
 
 const serviceAccountAuth = new JWT({
 	email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -7,7 +7,7 @@ const serviceAccountAuth = new JWT({
 	scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-export default async (req, context) => {
+exports.handler = async (event, context) => {
 	try {
 		const doc = new GoogleSpreadsheet(
 			process.env.GOOGLE_SPREADSHEET_ID,
@@ -17,9 +17,15 @@ export default async (req, context) => {
 		await doc.loadInfo(); // Load sheet info
 		const sheet = doc.sheetsByTitle['Room Details'];
 		const rows = await sheet.getCellsInRange('A1:L5');
-		return new Response(JSON.stringify(rows));
+		return {
+			body: JSON.stringify(rows),
+			statusCode: 200,
+		};
 	} catch (error) {
 		console.log(error);
-		return new Response(JSON.stringify({error}), {status: 400});
+		return {
+			body: JSON.stringify({error}),
+			statusCode: 400,
+		};
 	}
 };
